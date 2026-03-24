@@ -43,14 +43,19 @@
      SCREEN 1: LOGIN
      ============================================================ -->
 <div class="screen active" id="screen-login">
-  <div class="napkin-card animate-in">
+
+  <!-- Guardanapo de trás (rotacionado, decorativo) -->
+  <div class="login-napkin-back"></div>
+
+  <!-- Guardanapo principal (o card de login) -->
+  <div class="login-napkin-main animate-in">
 
     <!-- Logo -->
-    <div style="text-align:center; margin-bottom:32px;">
-      <h1 class="font-headline" style="font-size:42px; letter-spacing:-0.04em; line-height:1;">
+    <div style="text-align:center; margin-bottom:28px;">
+      <h1 class="font-headline" style="font-size:38px; letter-spacing:-0.04em; line-height:1;">
         <span class="logo-text"><span class="base">Guardanap</span><span class="on">On</span></span>
       </h1>
-      <p class="font-scribble" style="margin-top:10px; font-size:16px; color:var(--gold);">Escolha uma música</p>
+      <p class="font-scribble" style="margin-top:8px; font-size:16px; color:var(--gold);">Escolha uma música</p>
     </div>
 
     <!-- Seleção de papel -->
@@ -75,7 +80,7 @@
     </div>
 
     <!-- Campos -->
-    <div style="margin-bottom:24px;">
+    <div style="margin-bottom:22px;">
       <label class="ink-label" for="login-email">teu e-mail aqui...</label>
       <input class="ink-input" id="login-email" type="email" placeholder="email@servidor.com" autocomplete="email"/>
     </div>
@@ -89,26 +94,26 @@
     <div class="auth-error" id="auth-error"></div>
 
     <!-- Submit -->
-    <div style="margin-top:28px;">
-      <button class="btn-gold" style="width:100%; font-size:18px; padding:16px;" onclick="App.doLogin()">
+    <div style="margin-top:24px;">
+      <button class="btn-gold" style="width:100%; font-size:17px; padding:15px;" onclick="App.doLogin()">
         ✓ ENTRAR
       </button>
     </div>
 
     <!-- Links -->
-    <div style="display:flex; justify-content:space-between; margin-top:20px;">
+    <div style="display:flex; justify-content:space-between; margin-top:18px;">
       <span class="font-scribble" style="font-size:14px; text-decoration:underline; cursor:pointer; color:var(--teal); opacity:0.8;">Esqueci a senha?</span>
-      <span class="font-scribble" style="font-size:14px; text-decoration:underline; cursor:pointer; color:var(--gold-dark); opacity:0.9;"
+      <span class="font-scribble" style="font-size:14px; text-decoration:underline; cursor:pointer; color:var(--gold-dark);"
             onclick="App.showScreen('screen-register')">Quero me juntar →</span>
     </div>
 
     <!-- Ícone decorativo -->
-    <div style="text-align:center; margin-top:24px; opacity:0.2;">
-      <span class="material-symbols-outlined" style="font-size:32px;">coffee</span>
+    <div style="text-align:center; margin-top:20px; opacity:0.18;">
+      <span class="material-symbols-outlined" style="font-size:28px;">coffee</span>
     </div>
 
     <!-- Scribble de rodapé -->
-    <div style="position:absolute; bottom:12px; right:14px; font-family:'Indie Flower',cursive; font-size:10px; opacity:0.2; text-transform:uppercase; letter-spacing:0.1em; transform:rotate(-45deg);">
+    <div style="position:absolute; bottom:14px; right:16px; font-family:'Indie Flower',cursive; font-size:9px; opacity:0.15; text-transform:uppercase; letter-spacing:0.1em; transform:rotate(-45deg);">
       Pague a conta antes de sair
     </div>
   </div>
