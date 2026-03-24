@@ -1,6 +1,7 @@
 /* ============================================================
-   GuardanapON — Design System v2
-   Paleta: Teal #1a6b6b · Dourado #e8a020 · Bege #f0ede8
+   GuardanapON — Design System v3
+   Textura: Guardanapo waffle (trama quadriculada)
+   Paleta: Teal #1a6b6b · Dourado #e8a020 · Branco guardanapo
    ============================================================ */
 
 :root {
@@ -11,28 +12,65 @@
   --gold:          #e8a020;
   --gold-light:    #fef3e0;
   --gold-dark:     #c4841a;
-  --napkin-white:  #f9f8f5;
-  --napkin-warm:   #f0ede8;
-  --napkin-shadow: #e2ddd6;
+
+  /* Cores do guardanapo */
+  --napkin-white:  #fafafa;
+  --napkin-off:    #f4f3f0;
+  --napkin-warm:   #eeece8;
+  --napkin-shadow: #dddad4;
+  --napkin-crease: rgba(0,0,0,0.06);
+
   --ink:           #1c2b2b;
   --ink-light:     #3d5252;
-  --surface-card:  #f9f8f5;
+  --surface-card:  #fafafa;
   --error:         #c0392b;
   --error-light:   #fdeaea;
-  --shadow-sm:  2px 2px 0px var(--ink);
-  --shadow-md:  4px 4px 0px rgba(28,43,43,0.7);
-  --shadow-lg:  6px 6px 0px rgba(28,43,43,0.7);
-  --shadow-soft: 0 4px 20px rgba(28,43,43,0.1);
+
+  --shadow-sm:   2px 2px 0px rgba(28,43,43,0.55);
+  --shadow-md:   4px 4px 0px rgba(28,43,43,0.55);
+  --shadow-lg:   6px 6px 0px rgba(28,43,43,0.55);
+  --shadow-soft: 0 4px 24px rgba(28,43,43,0.10);
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
 
+/* ============================================================
+   TEXTURA WAFFLE — trama quadriculada do guardanapo
+   ============================================================ */
+.waffle {
+  background-color: var(--napkin-white);
+  background-image:
+    /* Grade principal — quadrados da trama */
+    linear-gradient(rgba(0,0,0,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.045) 1px, transparent 1px),
+    /* Grade fina interna — dá profundidade ao waffle */
+    linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size:
+    12px 12px,
+    12px 12px,
+    3px 3px,
+    3px 3px;
+  background-position:
+    -1px -1px,
+    -1px -1px,
+    -1px -1px,
+    -1px -1px;
+}
+
+/* Fundo geral do app — guardanapo ligeiramente acinzentado */
 body {
   font-family: 'Space Grotesk', sans-serif;
-  background: var(--napkin-warm);
   color: var(--ink);
   min-height: max(884px, 100dvh);
   overflow-x: hidden;
+
+  /* Fundo fora dos cards — como a mesa embaixo do guardanapo */
+  background-color: var(--napkin-warm);
+  background-image:
+    linear-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 .material-symbols-outlined {
@@ -43,15 +81,18 @@ body {
 .screen { display:none; min-height:100vh; flex-direction:column; }
 .screen.active { display:flex; }
 
+/* Area de conteúdo com textura waffle */
 .napkin {
-  background-color: var(--napkin-warm);
+  background-color: var(--napkin-off);
   background-image:
-    linear-gradient(to right, rgba(28,43,43,0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(28,43,43,0.03) 1px, transparent 1px);
-  background-size: 24px 24px;
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.015) 1px, transparent 1px);
+  background-size: 12px 12px, 12px 12px, 3px 3px, 3px 3px;
 }
 
-/* ===== TYPOGRAPHY ===== */
+/* ===== TIPOGRAFIA ===== */
 .font-headline { font-family:'Epilogue',sans-serif; font-weight:900; }
 .font-scribble { font-family:'Indie Flower',cursive; }
 
@@ -96,8 +137,7 @@ body {
   background:transparent; border:1.5px solid var(--teal);
   color:var(--teal); font-family:'Space Grotesk',sans-serif;
   font-weight:700; text-transform:uppercase; letter-spacing:0.06em;
-  cursor:pointer; padding:12px 24px; font-size:12px;
-  transition:all 0.15s;
+  cursor:pointer; padding:12px 24px; font-size:12px; transition:all 0.15s;
 }
 .btn-ghost:hover { background:var(--teal); color:#fff; }
 
@@ -126,11 +166,19 @@ body {
 /* ===== TOPBAR ===== */
 .topbar {
   position:sticky; top:0; z-index:50;
-  background:var(--napkin-white);
+  /* Topbar também tem textura waffle */
+  background-color: var(--napkin-white);
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.015) 1px, transparent 1px);
+  background-size: 12px 12px, 12px 12px, 3px 3px, 3px 3px;
   border-bottom:1.5px solid var(--napkin-shadow);
   padding:14px 20px; display:flex; align-items:center;
   justify-content:space-between;
   box-shadow:0 2px 12px rgba(28,43,43,0.07);
+  position:sticky;
 }
 .topbar::after {
   content:''; position:absolute; bottom:-3px; left:0;
@@ -140,7 +188,13 @@ body {
 /* ===== BOTTOM NAV ===== */
 .bottomnav {
   position:fixed; bottom:0; left:0; width:100%; z-index:50;
-  background:var(--napkin-white);
+  background-color: var(--napkin-white);
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.015) 1px, transparent 1px);
+  background-size: 12px 12px, 12px 12px, 3px 3px, 3px 3px;
   border-top:1.5px solid var(--napkin-shadow);
   display:flex; justify-content:space-around;
   padding:10px 0 24px;
@@ -169,9 +223,7 @@ body {
 .progress-track {
   width:100%; height:5px; background:var(--napkin-shadow); overflow:hidden;
 }
-.progress-fill {
-  height:100%; background:var(--teal); transition:width 0.3s ease;
-}
+.progress-fill { height:100%; background:var(--teal); transition:width 0.3s ease; }
 .vote-bar-track { width:100%; height:6px; background:var(--napkin-shadow); }
 .vote-bar-fill  { height:100%; background:var(--teal); opacity:0.6; }
 
@@ -192,14 +244,23 @@ body {
 
 /* ===== MODALS ===== */
 .modal-overlay {
-  position:fixed; inset:0; background:rgba(28,43,43,0.55);
+  position:fixed; inset:0; background:rgba(28,43,43,0.5);
   z-index:100; display:none; align-items:flex-end; justify-content:center;
   backdrop-filter:blur(2px);
 }
 .modal-overlay.open { display:flex; }
 .modal-sheet {
-  width:100%; max-width:480px; background:var(--napkin-white);
-  border-top:3px solid var(--teal); padding:28px 24px 48px;
+  width:100%; max-width:480px;
+  /* Modal também tem textura waffle */
+  background-color: var(--napkin-white);
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.015) 1px, transparent 1px);
+  background-size: 12px 12px, 12px 12px, 3px 3px, 3px 3px;
+  border-top:3px solid var(--teal);
+  padding:28px 24px 48px;
   transform:translateY(100%);
   transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);
   box-shadow:0 -8px 32px rgba(28,43,43,0.15);
@@ -249,8 +310,7 @@ body {
 .coin-badge {
   background:var(--gold-light); border:1.5px solid var(--gold);
   font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:12px;
-  padding:5px 10px; display:flex; align-items:center; gap:5px;
-  color:var(--gold-dark);
+  padding:5px 10px; display:flex; align-items:center; gap:5px; color:var(--gold-dark);
 }
 
 /* ===== WALLET CARD ===== */
@@ -273,7 +333,8 @@ body {
 /* ===== LOADING ===== */
 .loading-overlay {
   position:fixed; inset:0; background:var(--napkin-white); z-index:999;
-  display:flex; align-items:center; justify-content:center; flex-direction:column; gap:16px;
+  display:flex; align-items:center; justify-content:center;
+  flex-direction:column; gap:16px;
 }
 .loading-stamp {
   font-family:'Epilogue',sans-serif; font-weight:900; font-size:32px; color:var(--teal);
@@ -288,29 +349,54 @@ body {
 
 /* ===== LOGIN SCREEN ===== */
 #screen-login {
-  background:var(--napkin-warm);
-  align-items:center; justify-content:center; padding:24px; position:relative; overflow:hidden;
+  align-items:center; justify-content:center; padding:24px;
+  position:relative; overflow:hidden;
+  /* Fundo com textura waffle mais pronunciada */
+  background-color: var(--napkin-off);
+  background-image:
+    linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size: 12px 12px, 12px 12px, 3px 3px, 3px 3px;
 }
-/* Cruzes decorativas (+) — identidade da marca */
+
+/* Cruzes decorativas */
 #screen-login::before {
   content:'+ + + +\A+ + + +\A+ + + +\A+ + + +';
   white-space:pre; position:absolute; top:24px; right:20px;
-  font-size:14px; font-weight:700; color:var(--teal); opacity:0.25;
+  font-size:14px; font-weight:700; color:var(--teal); opacity:0.2;
   letter-spacing:6px; line-height:1.8;
   font-family:'Space Grotesk',sans-serif; pointer-events:none;
 }
 #screen-login::after {
   content:'+ + +\A+ + +\A+ + +';
   white-space:pre; position:absolute; bottom:40px; left:20px;
-  font-size:12px; font-weight:700; color:var(--teal); opacity:0.18;
+  font-size:12px; font-weight:700; color:var(--teal); opacity:0.15;
   letter-spacing:6px; line-height:1.8;
   font-family:'Space Grotesk',sans-serif; pointer-events:none;
 }
 
+/* Card de login — guardanapo branco sobre a mesa */
 .napkin-card {
-  background:var(--napkin-white); padding:36px 28px; width:100%; max-width:380px;
-  position:relative; box-shadow:var(--shadow-soft), 6px 6px 0 rgba(28,43,43,0.08);
-  border:1px solid var(--napkin-shadow); border-bottom:3px solid var(--teal);
+  /* Textura waffle branca no card */
+  background-color: var(--napkin-white);
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.015) 1px, transparent 1px);
+  background-size: 12px 12px, 12px 12px, 3px 3px, 3px 3px;
+
+  padding:36px 28px; width:100%; max-width:380px;
+  position:relative;
+  /* Sombra suave imitando guardanapo sobre a mesa */
+  box-shadow:
+    0 2px 4px rgba(28,43,43,0.06),
+    0 8px 24px rgba(28,43,43,0.10),
+    8px 8px 0 rgba(28,43,43,0.06);
+  border:1px solid var(--napkin-shadow);
+  border-bottom:3px solid var(--teal);
 }
 
 /* ===== ROLE SELECTOR ===== */
@@ -322,10 +408,15 @@ body {
   border:1.5px solid var(--napkin-shadow); cursor:pointer;
   color:var(--ink-light); transition:all 0.15s;
   display:flex; flex-direction:column; align-items:center; gap:5px;
-  background:var(--napkin-warm);
+  /* Chips também com waffle */
+  background-color: var(--napkin-warm);
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 8px 8px;
 }
-.role-chip:hover { border-color:var(--teal); color:var(--teal); }
-.role-chip.selected { border-color:var(--teal); background:var(--teal); color:#fff; box-shadow:var(--shadow-sm); }
+.role-chip:hover { border-color:var(--teal); color:var(--teal); background-image:none; background-color:var(--teal-light); }
+.role-chip.selected { border-color:var(--teal-dark); background:var(--teal); background-image:none; color:#fff; box-shadow:var(--shadow-sm); }
 .role-chip .material-symbols-outlined { font-size:20px; }
 
 /* ===== REGISTER ===== */
@@ -336,8 +427,17 @@ body {
 
 /* ===== REQUEST CARDS ===== */
 .request-card {
-  background:var(--surface-card); border:1px solid var(--napkin-shadow);
-  border-left:4px solid var(--teal); box-shadow:var(--shadow-soft);
+  /* Cards com textura waffle */
+  background-color: var(--napkin-white);
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.015) 1px, transparent 1px);
+  background-size: 12px 12px, 12px 12px, 3px 3px, 3px 3px;
+  border:1px solid var(--napkin-shadow);
+  border-left:4px solid var(--teal);
+  box-shadow:0 2px 8px rgba(28,43,43,0.07);
   padding:18px; position:relative; overflow:hidden; margin-bottom:14px;
   transition:box-shadow 0.15s;
 }
@@ -347,9 +447,16 @@ body {
 
 /* ===== QUEUE ITEMS ===== */
 .queue-item {
-  background:var(--surface-card); border:1px solid var(--napkin-shadow);
-  box-shadow:0 2px 8px rgba(28,43,43,0.05); padding:14px 16px;
-  display:flex; align-items:center; gap:14px; margin-bottom:8px;
+  background-color: var(--napkin-white);
+  background-image:
+    linear-gradient(rgba(0,0,0,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.035) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.012) 1px, transparent 1px);
+  background-size: 12px 12px, 12px 12px, 3px 3px, 3px 3px;
+  border:1px solid var(--napkin-shadow);
+  box-shadow:0 2px 6px rgba(28,43,43,0.05);
+  padding:14px 16px; display:flex; align-items:center; gap:14px; margin-bottom:8px;
 }
 .queue-rank { font-family:'Epilogue',sans-serif; font-weight:900; font-size:22px; color:var(--napkin-shadow); min-width:28px; }
 .queue-rank.top { color:var(--gold); }
@@ -369,18 +476,46 @@ body {
 }
 .search-result:hover { background:var(--teal-light); }
 .album-art {
-  width:44px; height:44px; background:var(--napkin-warm);
+  width:44px; height:44px;
+  background-color: var(--napkin-warm);
+  background-image:
+    linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 8px 8px;
   border:1.5px solid var(--napkin-shadow); display:flex;
   align-items:center; justify-content:center; flex-shrink:0; font-size:18px;
 }
 
-/* ===== STATS ===== */
+/* ===== STAT BOXES ===== */
 .stat-box {
-  background:var(--surface-card); border:1px solid var(--napkin-shadow);
-  box-shadow:0 2px 8px rgba(28,43,43,0.05); padding:16px; text-align:center;
+  background-color: var(--napkin-white);
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.015) 1px, transparent 1px);
+  background-size: 12px 12px, 12px 12px, 3px 3px, 3px 3px;
+  border:1px solid var(--napkin-shadow);
+  box-shadow:0 2px 6px rgba(28,43,43,0.05);
+  padding:16px; text-align:center;
 }
 .stat-value { font-family:'Epilogue',sans-serif; font-weight:900; font-size:28px; line-height:1; color:var(--teal); }
 .stat-label { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--ink-light); margin-top:4px; opacity:0.7; }
+
+/* ===== LIVE BANNER ===== */
+.live-banner {
+  background-color: var(--napkin-white);
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.015) 1px, transparent 1px);
+  background-size: 12px 12px, 12px 12px, 3px 3px, 3px 3px;
+  border:1px solid var(--napkin-shadow);
+  border-left:4px solid var(--teal);
+  box-shadow:0 2px 12px rgba(28,43,43,0.07);
+  padding:20px; position:relative; overflow:hidden;
+}
 
 /* ===== COCKPIT MÚSICO ===== */
 .cockpit-playing {
@@ -393,13 +528,16 @@ body {
 .cockpit-playing .progress-track { background:rgba(255,255,255,0.2); }
 .cockpit-playing .progress-fill  { background:var(--gold); }
 
-/* Cruzes nos headers de telas */
-.screen-crosses {
-  position:absolute; top:16px; right:16px;
-  font-size:12px; font-weight:700; color:var(--teal); opacity:0.2;
-  letter-spacing:5px; line-height:1.8; white-space:pre;
-  font-family:'Space Grotesk',sans-serif; pointer-events:none;
+/* Card genérico com waffle */
+.card {
+  background-color: var(--napkin-white);
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.015) 1px, transparent 1px);
+  background-size: 12px 12px, 12px 12px, 3px 3px, 3px 3px;
+  border:1px solid var(--napkin-shadow);
+  box-shadow:var(--shadow-soft);
+  padding:20px; position:relative;
 }
-
-/* Gold underline section title */
-.gold-line { width:50px; height:3px; background:var(--gold); margin:6px 0 14px; }
