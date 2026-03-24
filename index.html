@@ -9,7 +9,7 @@
   <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,800;0,900;1,800&family=Space+Grotesk:wght@300;400;500;700&family=Indie+Flower&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;900&family=Space+Grotesk:wght@300;400;500;700&family=Indie+Flower&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 
   <!-- Estilos -->
@@ -48,9 +48,9 @@
     <!-- Logo -->
     <div style="text-align:center; margin-bottom:32px;">
       <h1 class="font-headline" style="font-size:42px; letter-spacing:-0.04em; line-height:1;">
-        <span style="background:var(--primary-container); padding:2px 10px; display:inline-block; transform:rotate(-1.5deg); box-shadow:4px 4px 0 var(--on-surface);">GuardanapON</span>
+        <span class="logo-text"><span class="base">Guardanap</span><span class="on">On</span></span>
       </h1>
-      <p class="font-scribble" style="margin-top:10px; font-size:16px; opacity:0.6;">Ideias direto na mesa.</p>
+      <p class="font-scribble" style="margin-top:10px; font-size:16px; color:var(--gold);">Escolha uma música</p>
     </div>
 
     <!-- Seleção de papel -->
@@ -90,15 +90,15 @@
 
     <!-- Submit -->
     <div style="margin-top:28px;">
-      <button class="btn-primary" style="width:100%; font-size:18px; padding:16px;" onclick="App.doLogin()">
+      <button class="btn-gold" style="width:100%; font-size:18px; padding:16px;" onclick="App.doLogin()">
         ✓ ENTRAR
       </button>
     </div>
 
     <!-- Links -->
     <div style="display:flex; justify-content:space-between; margin-top:20px;">
-      <span class="font-scribble" style="font-size:14px; text-decoration:underline; cursor:pointer; opacity:0.6;">Esqueci a senha?</span>
-      <span class="font-scribble" style="font-size:14px; text-decoration:underline; cursor:pointer; opacity:0.6;"
+      <span class="font-scribble" style="font-size:14px; text-decoration:underline; cursor:pointer; color:var(--teal); opacity:0.8;">Esqueci a senha?</span>
+      <span class="font-scribble" style="font-size:14px; text-decoration:underline; cursor:pointer; color:var(--gold-dark); opacity:0.9;"
             onclick="App.showScreen('screen-register')">Quero me juntar →</span>
     </div>
 
@@ -163,7 +163,7 @@
      ============================================================ -->
 <div class="screen" id="screen-cliente">
   <header class="topbar">
-    <div class="logo-stamp">GuardanapON</div>
+    <div class="logo-stamp"><span class="base">Guardanap</span><span class="on">On</span></div>
     <div style="display:flex; gap:12px; align-items:center;">
       <div class="coin-badge" id="coin-badge">
         <span class="material-symbols-outlined" style="font-size:16px;">toll</span>
@@ -183,7 +183,7 @@
       <div class="tag tag-dark" style="margin-bottom:8px; display:inline-flex; align-items:center; gap:6px;">
         <span class="live-dot"></span> AO VIVO AGORA
       </div>
-      <div class="card" style="transform:rotate(-0.5deg); padding:20px;">
+      <div class="live-banner" style="padding:20px;">
         <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; opacity:0.5; margin-bottom:4px;">Bar do Zé · João Silva</p>
         <h2 class="font-scribble" style="font-size:36px; line-height:1.1;">Bohemian Rhapsody</h2>
         <p style="font-size:11px; opacity:0.5; margin-top:4px;">Queen • tocando agora</p>
@@ -303,7 +303,7 @@
     <button onclick="App.showScreen('screen-cliente')" style="background:none;border:none;cursor:pointer;">
       <span class="material-symbols-outlined" style="font-size:20px;">arrow_back</span>
     </button>
-    <div class="logo-stamp" style="font-size:16px; padding:4px 8px;">Pedir Música</div>
+    <div class="logo-stamp" style="font-size:16px;"><span class="base">Pedir Música</span></div>
     <div style="width:40px;"></div>
   </header>
 
@@ -320,7 +320,7 @@
     <div style="margin-bottom:20px; padding:12px 16px; border:1px dashed var(--outline-variant); display:flex; gap:10px; align-items:flex-start;">
       <span class="material-symbols-outlined" style="font-size:18px; opacity:0.5; flex-shrink:0;">info</span>
       <p style="font-size:11px; line-height:1.5; opacity:0.6;">
-        Músicas com <strong style="color:var(--primary);">cifra disponível</strong> têm maior chance de serem aceitas.
+        Músicas com <strong style="color:var(--teal);">cifra disponível</strong> têm maior chance de serem aceitas.
         Pedidos pagos têm prioridade na fila — o músico pode recusar e você é reembolsado automaticamente.
       </p>
     </div>
@@ -394,7 +394,7 @@
     <button onclick="App.showScreen('screen-cliente')" style="background:none;border:none;cursor:pointer;">
       <span class="material-symbols-outlined">arrow_back</span>
     </button>
-    <div class="logo-stamp" style="font-size:16px; padding:4px 8px;">Fila de Votação</div>
+    <div class="logo-stamp" style="font-size:16px;"><span class="base">Fila de Votação</span></div>
     <div class="tag tag-dark">12 músicas</div>
   </header>
 
@@ -492,14 +492,14 @@
     <button onclick="App.showScreen('screen-cliente')" style="background:none;border:none;cursor:pointer;">
       <span class="material-symbols-outlined">arrow_back</span>
     </button>
-    <div class="logo-stamp" style="font-size:16px; padding:4px 8px;">Minha Carteira</div>
+    <div class="logo-stamp" style="font-size:16px;"><span class="base">Minha Carteira</span></div>
     <div style="width:40px;"></div>
   </header>
 
   <div class="content-area napkin">
     <div class="wallet-card" style="margin-bottom:24px;">
       <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5; margin-bottom:8px;">Saldo disponível</p>
-      <div class="font-headline" id="wallet-balance" style="font-size:52px; letter-spacing:-0.04em; color:var(--primary-container);">R$ 42,00</div>
+      <div class="font-headline" id="wallet-balance" style="font-size:52px; letter-spacing:-0.04em; color:var(--gold);">R$ 42,00</div>
       <p style="font-size:11px; opacity:0.4; margin-top:8px; font-family:'Indie Flower',cursive;">≈ 42 créditos na plataforma</p>
     </div>
 
@@ -528,14 +528,14 @@
           <div style="font-weight:700; font-size:14px;">Reembolso: Stairway to Heaven</div>
           <div style="font-size:10px; opacity:0.5; text-transform:uppercase; font-weight:700; margin-top:2px;">hoje · 21:45 · recusado pelo músico</div>
         </div>
-        <div class="font-headline" style="font-size:18px; color:var(--primary);">+R$ 10,00</div>
+        <div class="font-headline" style="font-size:18px; color:var(--teal);">+R$ 10,00</div>
       </div>
       <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 16px;">
         <div>
           <div style="font-weight:700; font-size:14px;">Recarga via Pix</div>
           <div style="font-size:10px; opacity:0.5; text-transform:uppercase; font-weight:700; margin-top:2px;">ontem · 20:00</div>
         </div>
-        <div class="font-headline" style="font-size:18px; color:var(--primary);">+R$ 50,00</div>
+        <div class="font-headline" style="font-size:18px; color:var(--teal);">+R$ 50,00</div>
       </div>
     </div>
   </div>
@@ -550,7 +550,7 @@
       <div style="width:36px; height:36px; background:var(--on-surface); display:flex; align-items:center; justify-content:center;">
         <span class="material-symbols-outlined" style="color:var(--surface); font-size:18px;">music_note</span>
       </div>
-      <div class="logo-stamp" style="font-size:14px; padding:2px 8px;">Cockpit</div>
+      <div class="logo-stamp" style="font-size:16px;"><span class="base">Cockpit</span></div>
     </div>
     <div style="display:flex; align-items:center; gap:8px;">
       <div style="display:flex; align-items:center; gap:6px; padding:6px 12px; background:rgba(239,68,68,0.1); border:1px solid var(--error);">
@@ -570,7 +570,7 @@
       <div class="tag tag-dark" style="margin-bottom:10px; display:inline-flex; align-items:center; gap:6px;">
         <span class="live-dot"></span> TOCANDO AGORA
       </div>
-      <div class="card" style="transform:rotate(-0.8deg); padding:22px; border-left:4px solid var(--primary-container);">
+      <div class="cockpit-playing">
         <h2 class="font-scribble" style="font-size:38px; line-height:1.1;">Bohemian Rhapsody</h2>
         <p style="font-size:11px; opacity:0.5; margin-top:4px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em;">Queen • 03:42 / 05:55</p>
         <div class="progress-track" style="margin-top:12px;"><div class="progress-fill" style="width:63%;"></div></div>
@@ -591,7 +591,7 @@
     <!-- Stats da noite -->
     <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:24px;">
       <div class="stat-box">
-        <div class="stat-value" style="font-size:24px; color:var(--primary);">R$ 142</div>
+        <div class="stat-value" style="font-size:24px; color:var(--teal);">R$ 142</div>
         <div class="stat-label">Receita</div>
       </div>
       <div class="stat-box">
@@ -614,14 +614,14 @@
       </div>
 
       <!-- Pago + sem cifra -->
-      <div class="request-card" style="border:2px solid rgba(186,26,26,0.2); background:rgba(255,218,214,0.15);">
+      <div class="request-card" style="border-left-color:var(--error); background:rgba(255,218,214,0.1);">
         <div style="position:absolute; top:10px; right:10px; display:flex; gap:6px;">
           <span class="tag tag-error">SEM CIFRA</span>
           <span class="tag tag-primary">R$ 15</span>
         </div>
         <div class="song-title" style="padding-right:120px;">Wonderwall</div>
         <div class="song-meta">Oasis · @OasisFan95</div>
-        <div class="song-meta" style="margin-top:2px; color:var(--primary);">"Para a Laura com amor 💕"</div>
+        <div class="song-meta" style="margin-top:2px; color:var(--teal);">"Para a Laura com amor 💕"</div>
         <div style="display:flex; gap:10px; margin-top:14px;">
           <button class="btn-danger" style="flex:1; font-size:12px; padding:10px;" onclick="App.handleMusicoDecline(this)">
             <span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">close</span> RECUSAR
@@ -694,14 +694,14 @@
     <button onclick="App.showScreen('screen-musico')" style="background:none;border:none;cursor:pointer;">
       <span class="material-symbols-outlined">arrow_back</span>
     </button>
-    <div class="logo-stamp" style="font-size:16px; padding:4px 8px;">Financeiro</div>
+    <div class="logo-stamp" style="font-size:16px;"><span class="base">Financeiro</span></div>
     <div style="width:40px;"></div>
   </header>
 
   <div class="content-area napkin">
     <div class="wallet-card" style="margin-bottom:24px;">
       <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5; margin-bottom:8px;">Saldo para saque</p>
-      <div class="font-headline" style="font-size:48px; letter-spacing:-0.04em; color:var(--primary-container);">R$ 127,40</div>
+      <div class="font-headline" style="font-size:48px; letter-spacing:-0.04em; color:var(--gold);">R$ 127,40</div>
       <p style="font-size:11px; opacity:0.4; margin-top:8px; font-family:'Indie Flower',cursive;">70% dos pedidos pagos · noite de hoje</p>
     </div>
 
@@ -741,7 +741,7 @@
           <div style="font-weight:700; font-size:13px;">Creep · @RadioHead</div>
           <div style="font-size:10px; opacity:0.4; text-transform:uppercase; font-weight:700;">22:14</div>
         </div>
-        <div class="font-headline" style="font-size:16px; color:var(--primary);">+R$ 14,00</div>
+        <div class="font-headline" style="font-size:16px; color:var(--teal);">+R$ 14,00</div>
       </div>
       <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 16px; border-bottom:1px dashed var(--outline-variant);">
         <div>
@@ -755,7 +755,7 @@
           <div style="font-weight:700; font-size:13px;">Wonderwall · @Gabi</div>
           <div style="font-size:10px; opacity:0.4; text-transform:uppercase; font-weight:700;">21:30</div>
         </div>
-        <div class="font-headline" style="font-size:16px; color:var(--primary);">+R$ 7,00</div>
+        <div class="font-headline" style="font-size:16px; color:var(--teal);">+R$ 7,00</div>
       </div>
     </div>
   </div>
@@ -769,7 +769,7 @@
     <button onclick="App.showScreen('screen-musico')" style="background:none;border:none;cursor:pointer;">
       <span class="material-symbols-outlined">arrow_back</span>
     </button>
-    <div class="logo-stamp" style="font-size:16px; padding:4px 8px;">Meu Perfil</div>
+    <div class="logo-stamp" style="font-size:16px;"><span class="base">Meu Perfil</span></div>
     <div style="width:40px;"></div>
   </header>
   <div class="content-area napkin">
@@ -810,7 +810,7 @@
     <button onclick="App.showScreen('screen-cliente')" style="background:none;border:none;cursor:pointer;">
       <span class="material-symbols-outlined">arrow_back</span>
     </button>
-    <div class="logo-stamp" style="font-size:16px; padding:4px 8px;">Meu Perfil</div>
+    <div class="logo-stamp" style="font-size:16px;"><span class="base">Meu Perfil</span></div>
     <div style="width:40px;"></div>
   </header>
   <div class="content-area napkin">
