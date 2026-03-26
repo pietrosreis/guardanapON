@@ -1,34 +1,33 @@
 <!DOCTYPE html>
-<html class="light" lang="pt-BR">
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GuardanapON — Cockpit</title>
-  <meta name="theme-color" content="#D8EF00"/>
+  <meta name="theme-color" content="#7a5c42"/>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
   <script>
     tailwind.config = {
-      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "primary":               "#576100",
-            "primary-container":     "#e0f818",
-            "on-primary-fixed":      "#414900",
-            "on-primary-container":  "#525c00",
-            "outline":               "#757777",
-            "outline-variant":       "#acadad",
-            "surface":               "#f6f6f6",
-            "surface-dim":           "#d2d5d5",
-            "surface-container-low": "#f0f1f1",
-            "surface-container":     "#e7e8e8",
-            "on-surface":            "#2d2f2f",
-            "on-background":         "#2d2f2f",
-            "secondary":             "#5c5b5b",
-            "secondary-dim":         "#504f4f",
-            "inverse-surface":       "#0c0f0f",
+            "wood":         "#7a5c42",
+            "napkin":       "#fafaf8",
+            "napkin-cream": "#f5f0e8",
+            "linen":        "#e8e0d0",
+            "linen-dark":   "#d0c4b0",
+            "hemstitch":    "#c8bfaf",
+            "ink":          "#2c1a10",
+            "ink-muted":    "#8b7355",
+            "ink-faint":    "#c4b8a8",
+            "stitch":       "#7a9aaa",
+            "stitch-light": "#dce8ee",
+            "stitch-dark":  "#4a6a7a",
+            "embroidery":   "#7a5040",
+            "embroidery-lt":"#c4a882",
+            "error":        "#c0533a",
           },
           fontFamily: { body: ["Space Grotesk", "sans-serif"] },
           borderRadius: { DEFAULT: "0px", lg: "0px", xl: "0px", full: "9999px" },
@@ -37,150 +36,148 @@
     }
   </script>
   <link rel="stylesheet" href="./css/stitch.css"/>
-  <style>
-    body { background-color: #0c0f0f; }
-  </style>
 </head>
-<body class="font-body text-on-surface min-h-screen">
+<body class="wood-bg font-body text-ink min-h-screen">
 
-  <!-- Fatal error -->
   <div id="fatalErrorBox" style="position:fixed;top:5rem;left:1rem;right:1rem;z-index:300;"></div>
 
-  <!-- ── Top App Bar ── -->
-  <header class="fixed top-0 left-0 right-0 z-50 m-2">
-    <div class="bg-surface shadow-[0_4px_12px_rgba(12,15,15,0.08)] rotate-[-0.3deg] flex items-center justify-between px-5 py-3">
-      <div class="flex items-center gap-4">
-        <!-- Hidden nav buttons required by app.js -->
-        <nav class="hidden">
-          <button class="nav-btn" data-target="dashboard"></button>
-          <button class="nav-btn" data-target="lancamentos"></button>
-          <button class="nav-btn" data-target="pesquisa"></button>
-          <button class="nav-btn" data-target="admin"></button>
-        </nav>
+  <!-- ── Top Bar (napkin strip) ── -->
+  <header class="fixed top-0 left-0 right-0 z-50 px-3 pt-3">
+    <div class="napkin-card napkin-shadow flex items-center justify-between px-5 py-3 rotate-[-0.2deg] border-b border-linen">
 
-        <button class="text-primary hover:bg-[#D8EF00]/20 transition-colors p-1.5">
-          <span class="material-symbols-outlined">menu</span>
+      <!-- Hidden nav (app.js hook) -->
+      <nav class="hidden" aria-hidden="true">
+        <button class="nav-btn" data-target="dashboard"></button>
+        <button class="nav-btn" data-target="lancamentos"></button>
+        <button class="nav-btn" data-target="pesquisa"></button>
+        <button class="nav-btn" data-target="admin"></button>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <button class="text-ink-muted hover:text-stitch transition-colors p-1">
+          <span class="material-symbols-outlined" style="font-size:22px">menu</span>
         </button>
-        <a href="dashboard.html" class="text-xl font-black text-[#0c0f0f] uppercase tracking-tighter">GuardanapON</a>
+        <a href="dashboard.html" class="text-lg font-black text-ink uppercase tracking-tight">GuardanapON</a>
       </div>
 
       <div class="flex items-center gap-4">
-        <!-- Session earnings (driven by app.js updateUserBar) -->
-        <div class="flex flex-col items-end">
-          <span class="text-[9px] uppercase tracking-widest font-bold text-primary opacity-60">Sessão</span>
-          <div id="topUserInfo" class="text-sm font-black text-on-background">
-            <span>—</span>
-          </div>
+        <!-- User info (app.js fills the span) -->
+        <div id="topUserInfo"
+          class="hidden md:flex items-center gap-2 text-[11px] font-bold text-ink-muted">
+          Olá, <span class="text-stitch-dark"></span>
         </div>
 
         <!-- Logout -->
         <button id="btnSairHeader"
-          class="bg-[#D8EF00] text-primary font-black text-[10px] uppercase tracking-widest px-3 py-1.5 hover:brightness-95 transition-all shadow-[2px_2px_0_#576100]">
+          class="btn-napkin-outline text-[10px] font-black uppercase tracking-widest px-3 py-1.5">
           Sair
         </button>
 
-        <!-- Hidden theme toggle (required by app.js initStaticEvents) -->
+        <!-- Hidden theme toggle (app.js hook) -->
         <button id="themeToggle" style="display:none;"></button>
       </div>
     </div>
   </header>
 
-  <!-- ── Main Content ── -->
-  <main class="pt-28 pb-40 px-4 max-w-5xl mx-auto flex flex-col gap-10">
+  <!-- ── Main content ── -->
+  <main class="pt-28 pb-44 px-4 max-w-5xl mx-auto flex flex-col gap-10">
 
-    <!-- Main Napkin -->
-    <section class="bg-surface gofrado-border shadow-2xl relative p-8 md:p-12 rotate-[0.2deg]">
+    <!-- Main napkin (large) -->
+    <section class="napkin-card hemstitch-border napkin-shadow p-8 md:p-12 relative rotate-[0.15deg]">
+
+      <!-- Fold crease top -->
+      <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-b from-black/5 to-transparent pointer-events-none"></div>
 
       <!-- Header row -->
-      <div class="flex flex-col md:flex-row justify-between items-start gap-6 mb-14">
+      <div class="flex flex-col md:flex-row justify-between items-start gap-6 mb-12">
         <div>
-          <h2 class="text-4xl md:text-5xl font-black tracking-tighter text-on-background mb-1">Musician's Cockpit</h2>
-          <p class="text-primary font-medium italic opacity-70 text-sm">Bem-vindo ao seu painel de apresentação</p>
+          <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-ink-faint mb-2">Painel do músico</p>
+          <h2 class="text-4xl font-black tracking-tighter text-ink mb-1">Musician's Cockpit</h2>
+          <p class="text-ink-muted text-sm font-medium italic">Bem-vindo ao seu painel de apresentação</p>
         </div>
 
-        <!-- Status pinned note -->
-        <div class="bg-white p-4 rotate-[-2deg] shadow-lg border-l-4 border-primary-container relative flex-shrink-0">
-          <span class="material-symbols-outlined absolute -top-3 -right-2 text-secondary rotate-45 scale-75">push_pin</span>
-          <p class="text-[9px] font-bold uppercase tracking-widest mb-1 text-outline">Status atual</p>
+        <!-- Status tag (like a laundering label) -->
+        <div class="flex-shrink-0 bg-napkin-cream border border-linen-dark px-4 py-3 rotate-[-1.8deg] relative">
+          <span class="material-symbols-outlined absolute -top-3 -right-1 text-ink-faint text-2xl rotate-[40deg]"
+            style="font-variation-settings:'FILL' 0,'wght' 200,'GRAD' 0,'opsz' 24">push_pin</span>
+          <p class="text-[9px] font-bold uppercase tracking-widest text-ink-faint mb-1">Status</p>
           <div class="flex items-center gap-2">
-            <div class="w-2 h-2 bg-primary-container animate-pulse"></div>
-            <span class="font-bold text-base">ON STAGE</span>
+            <div class="w-2 h-2 rounded-full bg-stitch animate-pulse"></div>
+            <span class="font-bold text-sm text-ink uppercase tracking-wide">ON STAGE</span>
           </div>
         </div>
       </div>
 
       <!-- ── Pedidos Pagos ── -->
-      <div class="mb-14" id="secaoPedidosPagos">
-        <div class="flex items-center gap-4 mb-7">
-          <h3 class="text-xl font-black uppercase tracking-tight bg-primary-container px-4 py-1 rotate-[-1deg] text-on-primary-fixed">
+      <div class="mb-12">
+        <div class="flex items-center gap-4 mb-6">
+          <h3 class="font-black text-base uppercase tracking-widest text-ink-muted stitch-underline">
             Pedidos Pagos
           </h3>
-          <div class="h-px flex-1 border-b border-dashed border-outline-variant"></div>
+          <div class="flex-1 border-b border-linen-dark border-dashed"></div>
         </div>
 
-        <div id="listaPedidosPagos" class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <!-- Cards renderizados dinamicamente -->
-          <div class="bg-surface-container-low p-5 shadow-md rotate-[0.4deg] flex gap-4 items-center group hover:bg-white transition-all cursor-pointer relative overflow-hidden opacity-50">
-            <div class="absolute top-0 right-0 w-10 h-10 bg-primary-container flex items-center justify-center rotate-45 translate-x-5 -translate-y-5">
-              <span class="material-symbols-outlined text-primary -rotate-45 text-xs">star</span>
+        <div id="listaPedidosPagos" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Placeholder card -->
+          <div class="bg-napkin-cream border border-linen p-5 flex gap-4 items-center opacity-50">
+            <div class="w-14 h-14 bg-linen flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-hemstitch doodle-icon">music_note</span>
             </div>
-            <div class="w-16 h-16 bg-surface-dim flex items-center justify-center flex-shrink-0">
-              <span class="material-symbols-outlined text-outline doodle-icon">music_note</span>
-            </div>
-            <div class="flex-grow">
-              <h4 class="font-black text-lg leading-tight">Sem pedidos pagos</h4>
-              <p class="text-xs opacity-50 font-bold uppercase tracking-widest mt-1">ainda esta sessão</p>
+            <div>
+              <p class="font-bold text-ink-muted text-sm">Nenhum pedido pago ainda</p>
+              <p class="text-[10px] text-ink-faint mt-1 font-medium">Os pedidos pagos aparecerão aqui</p>
             </div>
           </div>
         </div>
       </div>
 
       <!-- ── Votação Gratuita ── -->
-      <div id="secaoVotacao">
-        <div class="flex items-center gap-4 mb-7">
-          <h3 class="text-xl font-black uppercase tracking-tight border-2 border-on-background px-4 py-1 rotate-[0.5deg]">
+      <div>
+        <div class="flex items-center gap-4 mb-6">
+          <h3 class="font-black text-base uppercase tracking-widest text-ink-muted stitch-underline">
             Votação Gratuita
           </h3>
-          <div class="h-px flex-1 border-b border-dashed border-outline-variant"></div>
+          <div class="flex-1 border-b border-linen-dark border-dashed"></div>
         </div>
 
-        <div id="listaVotacaoGratuita" class="space-y-3">
-          <!-- Placeholder: sem votos -->
-          <div class="flex items-center justify-between p-4 bg-white/50 border-b border-outline-variant">
+        <div id="listaVotacaoGratuita" class="space-y-2">
+          <div class="flex items-center justify-between p-4 bg-napkin-cream border-b border-linen">
             <div class="flex items-center gap-5">
-              <span class="text-3xl font-black opacity-10 italic">01</span>
+              <span class="text-3xl font-black text-hemstitch italic">01</span>
               <div>
-                <h4 class="font-bold text-base opacity-50">Nenhuma votação ainda</h4>
-                <p class="text-[10px] opacity-40 font-bold uppercase tracking-widest">Compartilhe o link para os clientes votarem</p>
+                <p class="font-bold text-ink-muted text-sm">Nenhuma votação ainda</p>
+                <p class="text-[10px] text-ink-faint font-medium uppercase tracking-wider">
+                  Compartilhe o link com o público
+                </p>
               </div>
             </div>
             <a href="busca.html"
-              class="border border-outline px-4 py-2 font-black text-xs uppercase hover:bg-primary-container hover:border-primary-container transition-all">
-              Ver Busca →
+              class="btn-napkin-outline px-4 py-2 text-[10px] font-black uppercase tracking-wider">
+              Abrir Busca →
             </a>
           </div>
         </div>
       </div>
 
-      <!-- Tear decoration -->
-      <div class="absolute -bottom-4 left-0 w-full h-8 tear-bottom bg-surface pointer-events-none"></div>
+      <!-- Bottom fold -->
+      <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-t from-black/5 to-transparent pointer-events-none"></div>
     </section>
 
-    <!-- Musician note -->
-    <div class="self-end max-w-xs rotate-[1.5deg]">
-      <div class="bg-primary-container p-5 shadow-xl relative tear-bottom">
-        <span class="material-symbols-outlined absolute -top-4 left-4 text-primary scale-125">bookmark</span>
-        <p class="font-black text-on-primary-fixed uppercase text-[10px] mb-3 tracking-widest">Nota do músico</p>
-        <p class="text-on-primary-fixed font-medium italic leading-snug text-sm">
-          "Compartilhe o link da busca para o público votar nas músicas em tempo real!"
+    <!-- Secondary napkin (note) -->
+    <div class="self-end max-w-[260px] rotate-[1.8deg]">
+      <div class="bg-napkin-cream border border-linen napkin-shadow p-5 relative tear-bottom">
+        <span class="material-symbols-outlined absolute -top-3 left-4 text-stitch"
+          style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">bookmark</span>
+        <p class="text-[9px] font-black uppercase tracking-[0.2em] text-ink-muted mb-3">Nota</p>
+        <p class="text-ink font-medium italic leading-snug text-sm">
+          "Compartilhe o link da busca para o público votar ao vivo!"
         </p>
       </div>
     </div>
 
-    <!-- Link para busca pública -->
+    <!-- CTA link -->
     <div class="flex justify-center">
-      <a href="busca.html"
-        class="flex items-center gap-2 bg-[#D8EF00] text-primary font-black uppercase tracking-[0.15em] text-xs px-6 py-3 shadow-[4px_4px_0_#576100] hover:brightness-105 active:scale-95 transition-all">
+      <a href="busca.html" class="btn-napkin flex items-center gap-2 px-6 py-3 text-xs">
         <span class="material-symbols-outlined text-base">open_in_new</span>
         Abrir tela de votação pública
       </a>
@@ -188,35 +185,37 @@
 
   </main>
 
-  <!-- ── Bottom Navigation ── -->
-  <nav class="fixed bottom-0 left-0 w-full h-24 flex justify-around items-end pb-4 px-4 bg-surface z-50 tear-top border-t-2 border-[#dbdddd]/30 shadow-[0_-8px_24px_rgba(0,0,0,0.1)]">
+  <!-- ── Bottom Nav ── -->
+  <nav class="fixed bottom-0 left-0 w-full h-20 flex justify-around items-center px-4
+              napkin-card tear-top border-t border-linen shadow-[0_-4px_20px_rgba(44,26,16,0.12)] z-50">
     <button onclick="window.location.href='dashboard.html'"
-      class="flex flex-col items-center justify-center px-4 py-2 transition-all marker-active">
-      <span class="material-symbols-outlined doodle-icon text-on-surface">music_note</span>
-      <span class="text-[9px] font-bold uppercase tracking-widest text-on-surface">Cockpit</span>
+      class="flex flex-col items-center gap-0.5 px-4 py-2 transition-all marker-active">
+      <span class="material-symbols-outlined doodle-icon text-stitch-dark" style="font-size:22px">music_note</span>
+      <span class="text-[9px] font-black uppercase tracking-widest text-stitch-dark">Cockpit</span>
     </button>
     <a href="busca.html"
-      class="flex flex-col items-center justify-center px-4 py-2 text-secondary-dim opacity-60 hover:opacity-100 transition-all">
-      <span class="material-symbols-outlined doodle-icon">search</span>
-      <span class="text-[9px] font-bold uppercase tracking-widest">Busca</span>
+      class="flex flex-col items-center gap-0.5 px-4 py-2 text-ink-faint hover:text-stitch transition-colors">
+      <span class="material-symbols-outlined doodle-icon" style="font-size:22px">search</span>
+      <span class="text-[9px] font-black uppercase tracking-widest">Busca</span>
     </a>
-    <button class="flex flex-col items-center justify-center px-4 py-2 text-secondary-dim opacity-60 hover:opacity-100 transition-all">
-      <span class="material-symbols-outlined doodle-icon">inventory_2</span>
-      <span class="text-[9px] font-bold uppercase tracking-widest">Arquivo</span>
+    <button class="flex flex-col items-center gap-0.5 px-4 py-2 text-ink-faint hover:text-stitch transition-colors">
+      <span class="material-symbols-outlined doodle-icon" style="font-size:22px">inventory_2</span>
+      <span class="text-[9px] font-black uppercase tracking-widest">Arquivo</span>
     </button>
-    <a href="admin.html"
-      class="flex flex-col items-center justify-center px-4 py-2 text-secondary-dim opacity-60 hover:opacity-100 transition-all" id="btnAdminNav" style="display:none;">
-      <span class="material-symbols-outlined doodle-icon">shield_person</span>
-      <span class="text-[9px] font-bold uppercase tracking-widest">Admin</span>
+    <a href="admin.html" id="btnAdminNav" style="display:none;"
+      class="flex flex-col items-center gap-0.5 px-4 py-2 text-ink-faint hover:text-stitch transition-colors">
+      <span class="material-symbols-outlined doodle-icon" style="font-size:22px">shield_person</span>
+      <span class="text-[9px] font-black uppercase tracking-widest">Admin</span>
     </a>
   </nav>
 
   <!-- FAB -->
-  <button
-    class="fixed bottom-28 right-6 bg-primary-container text-on-primary-fixed w-14 h-14 shadow-2xl flex items-center justify-center group rotate-[-3deg] hover:rotate-0 transition-transform z-40"
-    title="Adicionar música manualmente">
-    <span class="material-symbols-outlined text-3xl">add</span>
-    <span class="absolute right-full mr-3 bg-on-background text-surface px-3 py-1 text-[9px] font-bold uppercase tracking-widest whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+  <button title="Adicionar música"
+    class="fixed bottom-24 right-5 w-12 h-12 bg-stitch text-white flex items-center justify-center
+           shadow-[3px_3px_0_var(--stitch-dark)] hover:brightness-105 active:scale-95 transition-all z-40 group rotate-[-2deg] hover:rotate-0">
+    <span class="material-symbols-outlined text-2xl">add</span>
+    <span class="absolute right-full mr-3 bg-ink text-napkin px-2 py-1 text-[9px] font-bold uppercase
+                 tracking-widest whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
       Adicionar música
     </span>
   </button>
@@ -231,8 +230,8 @@
     </div>
   </div>
 
-  <!-- Hidden elements required by app.js (month picker, meta, etc.) -->
-  <div style="display:none">
+  <!-- Hidden elements required by app.js -->
+  <div style="display:none" aria-hidden="true">
     <input id="planilhaMes" type="hidden"/>
     <select id="planilhaMesMes"></select>
     <select id="planilhaMesAno"></select>
@@ -247,17 +246,5 @@
   <script src="./js/supabase-lite.js"></script>
   <script src="./js/common.js"></script>
   <script src="./js/app.js"></script>
-  <script>
-    // Mostra link admin no nav se o usuário for admin
-    document.addEventListener('DOMContentLoaded', function() {
-      var checkAdmin = setInterval(function() {
-        if (window.AppState && window.AppState.adminAtivo) {
-          var btn = document.getElementById('btnAdminNav');
-          if (btn) btn.style.display = 'flex';
-          clearInterval(checkAdmin);
-        }
-      }, 500);
-    });
-  </script>
 </body>
 </html>

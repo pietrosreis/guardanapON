@@ -1,36 +1,33 @@
 <!DOCTYPE html>
-<html class="light" lang="pt-BR">
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GuardanapON — Peça uma Música</title>
-  <meta name="theme-color" content="#D8EF00"/>
+  <meta name="theme-color" content="#7a5c42"/>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
   <script>
     tailwind.config = {
-      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "primary":               "#576100",
-            "primary-container":     "#e0f818",
-            "on-primary-fixed":      "#414900",
-            "on-primary-container":  "#525c00",
-            "inverse-primary":       "#e6fe22",
-            "outline":               "#757777",
-            "outline-variant":       "#acadad",
-            "surface":               "#f6f6f6",
-            "surface-bright":        "#f6f6f6",
-            "surface-dim":           "#d2d5d5",
-            "surface-container-low": "#f0f1f1",
-            "surface-container":     "#e7e8e8",
-            "on-surface":            "#2d2f2f",
-            "on-background":         "#2d2f2f",
-            "secondary":             "#5c5b5b",
-            "secondary-dim":         "#504f4f",
-            "inverse-surface":       "#0c0f0f",
+            "wood":         "#7a5c42",
+            "napkin":       "#fafaf8",
+            "napkin-cream": "#f5f0e8",
+            "linen":        "#e8e0d0",
+            "linen-dark":   "#d0c4b0",
+            "hemstitch":    "#c8bfaf",
+            "ink":          "#2c1a10",
+            "ink-muted":    "#8b7355",
+            "ink-faint":    "#c4b8a8",
+            "stitch":       "#7a9aaa",
+            "stitch-light": "#dce8ee",
+            "stitch-dark":  "#4a6a7a",
+            "embroidery":   "#7a5040",
+            "embroidery-lt":"#c4a882",
+            "error":        "#c0533a",
           },
           fontFamily: { body: ["Space Grotesk", "sans-serif"] },
           borderRadius: { DEFAULT: "0px", lg: "0px", xl: "0px", full: "9999px" },
@@ -39,180 +36,170 @@
     }
   </script>
   <link rel="stylesheet" href="./css/stitch.css"/>
-  <style>
-    body { background-color: #0c0f0f; }
-  </style>
 </head>
-<body class="font-body text-on-surface min-h-screen overflow-x-hidden">
+<body class="wood-bg font-body text-ink min-h-screen overflow-x-hidden">
 
-  <!-- ── Top App Bar ── -->
-  <header class="fixed top-0 left-0 w-full z-50 m-2">
-    <div class="bg-surface flex items-center justify-between px-5 py-3 shadow-[0_4px_12px_rgba(12,15,15,0.05)] rotate-[-0.5deg]">
+  <!-- ── Top Bar ── -->
+  <header class="fixed top-0 left-0 w-full z-50 px-3 pt-3">
+    <div class="napkin-card napkin-shadow flex items-center justify-between px-5 py-3 rotate-[-0.3deg] border-b border-linen">
       <div class="flex items-center gap-4">
-        <button class="text-primary hover:bg-[#D8EF00]/20 transition-colors p-1.5">
-          <span class="material-symbols-outlined">menu</span>
+        <button class="text-ink-muted hover:text-stitch transition-colors p-1">
+          <span class="material-symbols-outlined" style="font-size:22px">menu</span>
         </button>
-        <h1 class="text-xl font-black text-[#0c0f0f] uppercase tracking-tighter">GuardanapON</h1>
+        <h1 class="text-lg font-black text-ink uppercase tracking-tight">GuardanapON</h1>
       </div>
       <div class="flex items-center gap-4">
-        <div class="flex items-center gap-2 font-bold text-[10px] tracking-widest uppercase text-primary">
-          <span class="bg-primary-container px-2 py-0.5 text-on-primary-fixed">PT</span>
-          <span class="opacity-30">/</span>
-          <span class="hover:bg-[#D8EF00]/20 px-2 py-0.5 cursor-pointer transition-colors">EN</span>
+        <div class="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest">
+          <span class="bg-stitch-light text-stitch-dark px-2 py-0.5 border border-hemstitch">PT</span>
+          <span class="text-ink-faint opacity-40">/</span>
+          <span class="text-ink-faint hover:text-stitch px-2 py-0.5 cursor-pointer transition-colors">EN</span>
         </div>
-        <a href="index.html" class="text-primary hover:bg-[#D8EF00]/20 transition-colors p-1.5">
-          <span class="material-symbols-outlined">account_circle</span>
+        <a href="index.html" class="text-ink-muted hover:text-stitch transition-colors p-1">
+          <span class="material-symbols-outlined" style="font-size:22px">account_circle</span>
         </a>
       </div>
     </div>
   </header>
 
   <!-- ── Main ── -->
-  <main class="min-h-screen pt-24 pb-36 px-4 max-w-2xl mx-auto flex flex-col gap-8">
+  <main class="min-h-screen pt-24 pb-32 px-4 max-w-xl mx-auto flex flex-col gap-8">
 
-    <!-- Main Napkin -->
-    <section class="bg-surface relative p-8 shadow-[0_20px_40px_rgba(12,15,15,0.1)] rotate-[0.6deg] gofrado-pattern">
-      <!-- White center layer -->
-      <div class="absolute inset-3 bg-surface pointer-events-none"></div>
+    <!-- Main napkin card -->
+    <section class="napkin-card hemstitch-border napkin-shadow p-8 rotate-[0.5deg] relative">
 
-      <div class="relative z-10 space-y-8">
+      <!-- Top fold crease -->
+      <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-b from-black/5 to-transparent pointer-events-none"></div>
+
+      <div class="space-y-8">
 
         <!-- Search -->
-        <div class="space-y-4">
-          <label class="font-black text-[10px] uppercase tracking-widest text-primary opacity-60">
+        <div class="space-y-3">
+          <label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-ink-faint">
             O que tocamos esta noite?
           </label>
-          <div class="relative group">
+          <div class="flex items-end gap-3 border-b border-linen-dark pb-1">
             <input id="campoBusca" type="text"
-              class="w-full bg-transparent border-0 border-b border-outline py-3 text-xl font-bold placeholder:text-outline-variant focus:ring-0 focus:border-primary transition-all"
-              placeholder="Nome da música ou artista..."/>
-            <button onclick="filtrarMusicas()" class="absolute right-0 top-1/2 -translate-y-1/2 text-primary">
-              <span class="material-symbols-outlined font-bold">search</span>
+              class="flex-1 bg-transparent border-none outline-none py-2 text-xl font-bold text-ink placeholder:text-ink-faint placeholder:italic placeholder:font-normal"
+              placeholder="Música ou artista..."/>
+            <button onclick="filtrarMusicas()" class="text-ink-muted hover:text-stitch transition-colors pb-1">
+              <span class="material-symbols-outlined">search</span>
             </button>
           </div>
         </div>
 
         <!-- Genre chips -->
         <div id="genreChips" class="flex flex-wrap gap-2">
-          <button onclick="filtrarGenero(this, 'todos')"
-            class="px-4 py-1 text-[10px] font-black uppercase tracking-tighter bg-primary-container text-on-primary-fixed scale-105 rotate-[-1deg] genre-chip active">
+          <button onclick="filtrarGenero(this,'todos')"
+            class="px-3 py-1 text-[10px] font-black uppercase tracking-wide border border-stitch bg-stitch-light text-stitch-dark genre-chip active transition-all">
             Todos
           </button>
-          <button onclick="filtrarGenero(this, 'rock')"
-            class="px-4 py-1 text-[10px] font-black uppercase tracking-tighter text-primary hover:bg-[#D8EF00]/20 transition-colors genre-chip">
+          <button onclick="filtrarGenero(this,'rock')"
+            class="px-3 py-1 text-[10px] font-black uppercase tracking-wide border border-linen-dark text-ink-muted hover:border-stitch hover:text-stitch genre-chip transition-all">
             Rock
           </button>
-          <button onclick="filtrarGenero(this, 'pop')"
-            class="px-4 py-1 text-[10px] font-black uppercase tracking-tighter text-primary hover:bg-[#D8EF00]/20 transition-colors genre-chip">
+          <button onclick="filtrarGenero(this,'pop')"
+            class="px-3 py-1 text-[10px] font-black uppercase tracking-wide border border-linen-dark text-ink-muted hover:border-stitch hover:text-stitch genre-chip transition-all">
             Pop
           </button>
-          <button onclick="filtrarGenero(this, 'indie')"
-            class="px-4 py-1 text-[10px] font-black uppercase tracking-tighter text-primary hover:bg-[#D8EF00]/20 transition-colors genre-chip">
+          <button onclick="filtrarGenero(this,'indie')"
+            class="px-3 py-1 text-[10px] font-black uppercase tracking-wide border border-linen-dark text-ink-muted hover:border-stitch hover:text-stitch genre-chip transition-all">
             Indie
           </button>
-          <button onclick="filtrarGenero(this, 'jazz')"
-            class="px-4 py-1 text-[10px] font-black uppercase tracking-tighter text-primary hover:bg-[#D8EF00]/20 transition-colors genre-chip">
+          <button onclick="filtrarGenero(this,'jazz')"
+            class="px-3 py-1 text-[10px] font-black uppercase tracking-wide border border-linen-dark text-ink-muted hover:border-stitch hover:text-stitch genre-chip transition-all">
             Jazz
           </button>
-          <button onclick="filtrarGenero(this, 'mpb')"
-            class="px-4 py-1 text-[10px] font-black uppercase tracking-tighter text-primary hover:bg-[#D8EF00]/20 transition-colors genre-chip">
+          <button onclick="filtrarGenero(this,'mpb')"
+            class="px-3 py-1 text-[10px] font-black uppercase tracking-wide border border-linen-dark text-ink-muted hover:border-stitch hover:text-stitch genre-chip transition-all">
             MPB
           </button>
-          <button onclick="filtrarGenero(this, 'sertanejo')"
-            class="px-4 py-1 text-[10px] font-black uppercase tracking-tighter text-primary hover:bg-[#D8EF00]/20 transition-colors genre-chip">
+          <button onclick="filtrarGenero(this,'sertanejo')"
+            class="px-3 py-1 text-[10px] font-black uppercase tracking-wide border border-linen-dark text-ink-muted hover:border-stitch hover:text-stitch genre-chip transition-all">
             Sertanejo
           </button>
         </div>
 
-        <!-- Voting list -->
-        <div class="space-y-5 pt-2">
-          <h2 class="font-black text-2xl uppercase tracking-tight text-primary scribble-underline inline-block">
+        <!-- List header -->
+        <div>
+          <h2 class="font-black text-xl uppercase tracking-tight text-ink inline-block stitch-underline mb-5">
             Pedidos Populares
           </h2>
-
-          <div id="listaMusicasBusca" class="space-y-1">
-            <!-- Gerado por JS -->
-          </div>
+          <div id="listaMusicasBusca" class="space-y-0.5"></div>
         </div>
 
-        <!-- Footer note -->
-        <p class="text-[9px] uppercase tracking-[0.2em] text-center pt-4 opacity-30 font-bold">
+        <!-- Footer -->
+        <p class="text-[9px] uppercase tracking-[0.22em] text-center pt-2 text-ink-faint">
           Pedidos processados pelo músico • Beba com moderação
         </p>
       </div>
+
+      <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-t from-black/5 to-transparent pointer-events-none"></div>
     </section>
 
-    <!-- Bento secondary cards -->
+    <!-- Secondary cards (bento) -->
     <div class="grid grid-cols-2 gap-4">
-      <div class="bg-surface p-5 shadow-lg rotate-[-1.5deg] gofrado-pattern min-h-[140px] flex flex-col justify-between">
-        <span class="material-symbols-outlined text-primary text-4xl doodle-icon">local_bar</span>
+      <div class="napkin-card border border-linen napkin-shadow p-5 rotate-[-1.2deg] flex flex-col justify-between min-h-[130px]">
+        <span class="material-symbols-outlined text-ink-faint doodle-icon text-3xl">local_bar</span>
         <div>
-          <h3 class="font-black text-[10px] uppercase tracking-widest">Happy Hour</h3>
-          <p class="text-sm font-bold text-primary mt-1">Gin Tônica 20% OFF até as 21h</p>
+          <p class="font-black text-[9px] uppercase tracking-widest text-ink-muted">Happy Hour</p>
+          <p class="text-sm font-bold text-stitch-dark mt-1">Gin Tônica 20% OFF até as 21h</p>
         </div>
       </div>
-      <div class="bg-primary-container p-5 shadow-lg rotate-[1.2deg] flex flex-col justify-between min-h-[140px]">
-        <span class="material-symbols-outlined text-on-primary-fixed text-4xl doodle-icon">groups</span>
+      <div class="bg-stitch-light border border-hemstitch napkin-shadow p-5 rotate-[1deg] flex flex-col justify-between min-h-[130px]">
+        <span class="material-symbols-outlined text-stitch doodle-icon text-3xl">groups</span>
         <div>
-          <h3 class="font-black text-[10px] uppercase tracking-widest text-on-primary-fixed">Esta noite</h3>
-          <p class="text-sm font-bold text-on-primary-fixed mt-1">Show ao vivo às 23h</p>
+          <p class="font-black text-[9px] uppercase tracking-widest text-ink-muted">Esta noite</p>
+          <p class="text-sm font-bold text-stitch-dark mt-1">Show ao vivo às 23h</p>
         </div>
       </div>
     </div>
 
   </main>
 
-  <!-- ── Bottom Navigation ── -->
-  <nav class="fixed bottom-0 left-0 w-full h-24 flex justify-around items-end pb-4 px-4 bg-[#fdfdfb] z-50 perforated-top-edge gofrado-pattern shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+  <!-- ── Bottom Nav ── -->
+  <nav class="fixed bottom-0 left-0 w-full h-20 flex justify-around items-center px-4
+              napkin-card tear-top border-t border-linen shadow-[0_-4px_20px_rgba(44,26,16,0.12)] z-50">
     <a href="busca.html"
-      class="flex flex-col items-center justify-center text-[#1a1a1a] px-5 py-2 scale-105 rotate-[-1.5deg] transition-all highlighter-stroke">
-      <span class="material-symbols-outlined doodle-icon text-2xl">description</span>
-      <span class="text-[9px] font-black uppercase tracking-widest">Pedidos</span>
+      class="flex flex-col items-center gap-0.5 px-5 py-2 transition-all marker-active">
+      <span class="material-symbols-outlined doodle-icon text-stitch-dark" style="font-size:22px">description</span>
+      <span class="text-[9px] font-black uppercase tracking-widest text-stitch-dark">Pedidos</span>
     </a>
-    <button class="flex flex-col items-center justify-center text-[#1a1a1a] opacity-60 hover:opacity-100 transition-all px-4 py-1 rotate-[1deg]">
-      <span class="material-symbols-outlined doodle-icon text-2xl">edit_note</span>
+    <button class="flex flex-col items-center gap-0.5 px-4 py-1 text-ink-faint hover:text-stitch transition-all">
+      <span class="material-symbols-outlined doodle-icon" style="font-size:22px">edit_note</span>
       <span class="text-[9px] font-black uppercase tracking-widest">Esboço</span>
     </button>
-    <button class="flex flex-col items-center justify-center text-[#1a1a1a] opacity-60 hover:opacity-100 transition-all px-4 py-1 rotate-[-0.5deg]">
-      <span class="material-symbols-outlined doodle-icon text-2xl">inventory_2</span>
+    <button class="flex flex-col items-center gap-0.5 px-4 py-1 text-ink-faint hover:text-stitch transition-all">
+      <span class="material-symbols-outlined doodle-icon" style="font-size:22px">inventory_2</span>
       <span class="text-[9px] font-black uppercase tracking-widest">Arquivo</span>
     </button>
     <a href="index.html"
-      class="flex flex-col items-center justify-center text-[#1a1a1a] opacity-60 hover:opacity-100 transition-all px-4 py-1 rotate-[0.8deg]">
-      <span class="material-symbols-outlined doodle-icon text-2xl">account_circle</span>
+      class="flex flex-col items-center gap-0.5 px-4 py-1 text-ink-faint hover:text-stitch transition-all">
+      <span class="material-symbols-outlined doodle-icon" style="font-size:22px">account_circle</span>
       <span class="text-[9px] font-black uppercase tracking-widest">Conta</span>
     </a>
   </nav>
 
-  <!-- Toast -->
   <div id="toastWrap"></div>
 
   <script>
-    // ── Dados mockup (serão substituídos por dados reais do Supabase) ──
     var musicas = [
-      { id: 1, titulo: 'Bohemian Rhapsody', artista: 'Queen',          genero: 'rock',      votos: 124 },
-      { id: 2, titulo: 'Creep',             artista: 'Radiohead',      genero: 'indie',     votos: 89  },
-      { id: 3, titulo: 'Seven Nation Army', artista: 'White Stripes',  genero: 'rock',      votos: 72  },
-      { id: 4, titulo: 'Valerie',           artista: 'Amy Winehouse',  genero: 'pop',       votos: 56  },
-      { id: 5, titulo: 'Garota de Ipanema', artista: 'Tom Jobim',      genero: 'mpb',       votos: 48  },
-      { id: 6, titulo: 'Hotel California',  artista: 'The Eagles',     genero: 'rock',      votos: 42  },
-      { id: 7, titulo: 'Wish You Were Here',artista: 'Pink Floyd',     genero: 'rock',      votos: 37  },
-      { id: 8, titulo: 'Fly Me to the Moon',artista: 'Frank Sinatra',  genero: 'jazz',      votos: 29  },
+      { id:1, titulo:'Bohemian Rhapsody', artista:'Queen',         genero:'rock',  votos:124 },
+      { id:2, titulo:'Creep',             artista:'Radiohead',     genero:'indie', votos:89  },
+      { id:3, titulo:'Seven Nation Army', artista:'White Stripes', genero:'rock',  votos:72  },
+      { id:4, titulo:'Valerie',           artista:'Amy Winehouse', genero:'pop',   votos:56  },
+      { id:5, titulo:'Garota de Ipanema', artista:'Tom Jobim',     genero:'mpb',   votos:48  },
+      { id:6, titulo:'Hotel California',  artista:'The Eagles',    genero:'rock',  votos:42  },
+      { id:7, titulo:'Wish You Were Here',artista:'Pink Floyd',    genero:'rock',  votos:37  },
+      { id:8, titulo:'Fly Me to the Moon',artista:'Frank Sinatra', genero:'jazz',  votos:29  },
     ];
-
-    var generoAtivo  = 'todos';
-    var buscaAtiva   = '';
-    var votosExtra   = {};
+    var generoAtivo = 'todos', buscaAtiva = '', votosExtra = {};
 
     function musicasFiltradas() {
       return musicas.filter(function(m) {
-        var passaGenero = generoAtivo === 'todos' || m.genero === generoAtivo;
-        var passaBusca  = !buscaAtiva ||
-          m.titulo.toLowerCase().includes(buscaAtiva) ||
-          m.artista.toLowerCase().includes(buscaAtiva);
-        return passaGenero && passaBusca;
-      }).sort(function(a, b) {
-        return (b.votos + (votosExtra[b.id] || 0)) - (a.votos + (votosExtra[a.id] || 0));
+        return (generoAtivo === 'todos' || m.genero === generoAtivo) &&
+               (!buscaAtiva || m.titulo.toLowerCase().includes(buscaAtiva) || m.artista.toLowerCase().includes(buscaAtiva));
+      }).sort(function(a,b) {
+        return (b.votos + (votosExtra[b.id]||0)) - (a.votos + (votosExtra[a.id]||0));
       });
     }
 
@@ -220,23 +207,27 @@
       var lista = document.getElementById('listaMusicasBusca');
       var itens = musicasFiltradas();
       if (!itens.length) {
-        lista.innerHTML = '<p class="text-sm font-bold opacity-40 py-4 text-center">Nenhuma música encontrada.</p>';
+        lista.innerHTML = '<p class="text-sm text-ink-faint italic py-6 text-center">Nenhuma música encontrada.</p>';
         return;
       }
-      var rotacoes = ['rotate-[0deg]', 'rotate-[-0.5deg]', 'rotate-[0.3deg]', 'rotate-[-0.3deg]', 'rotate-[0.5deg]'];
       lista.innerHTML = itens.map(function(m, i) {
-        var totalVotos = m.votos + (votosExtra[m.id] || 0);
-        var rot = rotacoes[i % rotacoes.length];
-        return '<div class="group flex items-center justify-between py-4 border-b border-dashed border-outline-variant hover:bg-surface-container-low transition-colors px-2 ' + rot + '">' +
-          '<div class="flex flex-col">' +
-            '<span class="text-lg font-bold text-primary leading-tight">' + escapeHtml(m.titulo) + '</span>' +
-            '<span class="text-[10px] font-medium uppercase tracking-widest text-outline">' + escapeHtml(m.artista) + '</span>' +
-          '</div>' +
+        var total = m.votos + (votosExtra[m.id]||0);
+        return '<div class="group flex items-center justify-between py-3.5 border-b border-linen hover:bg-napkin-cream transition-colors px-1">' +
           '<div class="flex items-center gap-4">' +
-            '<span class="font-black text-primary text-lg" id="votos-' + m.id + '">' + totalVotos + '</span>' +
+            '<span class="text-2xl font-black text-hemstitch italic w-8 text-right flex-shrink-0">' +
+              String(i+1).padStart(2,'0') +
+            '</span>' +
+            '<div>' +
+              '<p class="font-bold text-ink leading-snug">' + escapeHtml(m.titulo) + '</p>' +
+              '<p class="text-[10px] font-medium uppercase tracking-widest text-ink-faint mt-0.5">' + escapeHtml(m.artista) + '</p>' +
+            '</div>' +
+          '</div>' +
+          '<div class="flex items-center gap-3">' +
+            '<span id="votos-' + m.id + '" class="font-black text-stitch-dark text-lg w-10 text-right">' + total + '</span>' +
             '<button onclick="votar(' + m.id + ')" ' +
-              'class="w-12 h-12 bg-primary-container text-on-primary-fixed flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-sm">' +
-              '<span class="material-symbols-outlined font-black">add</span>' +
+              'class="w-10 h-10 bg-stitch-light border border-hemstitch text-stitch-dark flex items-center justify-center ' +
+              'hover:bg-stitch hover:text-white hover:border-stitch active:scale-95 transition-all">' +
+              '<span class="material-symbols-outlined" style="font-size:18px">add</span>' +
             '</button>' +
           '</div>' +
         '</div>';
@@ -244,23 +235,26 @@
     }
 
     function votar(id) {
-      votosExtra[id] = (votosExtra[id] || 0) + 1;
+      votosExtra[id] = (votosExtra[id]||0) + 1;
+      var m = musicas.find(function(x){ return x.id===id; });
       var el = document.getElementById('votos-' + id);
-      var m  = musicas.find(function(x) { return x.id === id; });
-      if (el && m) el.textContent = m.votos + votosExtra[id];
-      // Pulsa o botão visualmente
-      el && (el.style.transform = 'scale(1.4)', setTimeout(function() { el.style.transform = ''; }, 200));
-      showToast('Voto registrado em "' + (m ? m.titulo : '') + '"!');
+      if (el && m) {
+        el.textContent = m.votos + votosExtra[id];
+        el.style.transform = 'scale(1.5)';
+        el.style.color = '#7a9aaa';
+        setTimeout(function(){ el.style.transform=''; el.style.color=''; }, 250);
+      }
+      showToast(m ? '"' + m.titulo + '" — voto registrado!' : 'Voto registrado!');
     }
 
     function filtrarGenero(btn, genero) {
       generoAtivo = genero;
       document.querySelectorAll('.genre-chip').forEach(function(b) {
-        b.classList.remove('active', 'bg-primary-container', 'text-on-primary-fixed', 'scale-105', 'rotate-[-1deg]');
-        b.classList.add('text-primary');
+        b.classList.remove('active','bg-stitch-light','text-stitch-dark','border-stitch');
+        b.classList.add('text-ink-muted','border-linen-dark');
       });
-      btn.classList.add('active', 'bg-primary-container', 'text-on-primary-fixed', 'scale-105', 'rotate-[-1deg]');
-      btn.classList.remove('text-primary');
+      btn.classList.add('active','bg-stitch-light','text-stitch-dark','border-stitch');
+      btn.classList.remove('text-ink-muted','border-linen-dark');
       renderMusicas();
     }
 
@@ -280,7 +274,7 @@
       t.className = 'toast success';
       t.textContent = msg;
       wrap.appendChild(t);
-      setTimeout(function() { t.parentNode && t.parentNode.removeChild(t); }, 2800);
+      setTimeout(function(){ t.parentNode && t.parentNode.removeChild(t); }, 2600);
     }
 
     document.getElementById('campoBusca').addEventListener('input', filtrarMusicas);
