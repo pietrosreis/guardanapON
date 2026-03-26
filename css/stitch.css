@@ -1,0 +1,224 @@
+/* ===================================================
+   GuardanapON — Stitch Design System
+   Shared custom styles for all pages
+   =================================================== */
+
+/* Material Symbols */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+.doodle-icon {
+    font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ── Textures & Shapes ── */
+.gofrado-pattern {
+    background-image: radial-gradient(#dbdddd 0.3px, transparent 0.3px);
+    background-size: 1.5px 1.5px;
+}
+
+.perforated-top-edge {
+    clip-path: polygon(
+        0% 15%, 2% 0%, 4% 15%, 6% 0%, 8% 15%, 10% 0%,
+        12% 15%, 14% 0%, 16% 15%, 18% 0%, 20% 15%, 22% 0%,
+        24% 15%, 26% 0%, 28% 15%, 30% 0%, 32% 15%, 34% 0%,
+        36% 15%, 38% 0%, 40% 15%, 42% 0%, 44% 15%, 46% 0%,
+        48% 15%, 50% 0%, 52% 15%, 54% 0%, 56% 15%, 58% 0%,
+        60% 15%, 62% 0%, 64% 15%, 66% 0%, 68% 15%, 70% 0%,
+        72% 15%, 74% 0%, 76% 15%, 78% 0%, 80% 15%, 82% 0%,
+        84% 15%, 86% 0%, 88% 15%, 90% 0%, 92% 15%, 94% 0%,
+        96% 15%, 98% 0%, 100% 15%, 100% 100%, 0% 100%
+    );
+}
+
+.tear-bottom {
+    clip-path: polygon(
+        0% 0%, 100% 0%, 100% 95%, 98% 100%, 96% 95%, 94% 100%,
+        92% 95%, 90% 100%, 88% 95%, 86% 100%, 84% 95%, 82% 100%,
+        80% 95%, 78% 100%, 76% 95%, 74% 100%, 72% 95%, 70% 100%,
+        68% 95%, 66% 100%, 64% 95%, 62% 100%, 60% 95%, 58% 100%,
+        56% 95%, 54% 100%, 52% 95%, 50% 100%, 48% 95%, 46% 100%,
+        44% 95%, 42% 100%, 40% 95%, 38% 100%, 36% 95%, 34% 100%,
+        32% 95%, 30% 100%, 28% 95%, 26% 100%, 24% 95%, 22% 100%,
+        20% 95%, 18% 100%, 16% 95%, 14% 100%, 12% 95%, 10% 100%,
+        8% 95%, 6% 100%, 4% 95%, 2% 100%, 0% 95%
+    );
+}
+
+.tear-top {
+    clip-path: polygon(
+        0% 15%, 2% 0%, 4% 15%, 6% 0%, 8% 15%, 10% 0%,
+        12% 15%, 14% 0%, 16% 15%, 18% 0%, 20% 15%, 22% 0%,
+        24% 15%, 26% 0%, 28% 15%, 30% 0%, 32% 15%, 34% 0%,
+        36% 15%, 38% 0%, 40% 15%, 42% 0%, 44% 15%, 46% 0%,
+        48% 15%, 50% 0%, 52% 15%, 54% 0%, 56% 15%, 58% 0%,
+        60% 15%, 62% 0%, 64% 15%, 66% 0%, 68% 15%, 70% 0%,
+        72% 15%, 74% 0%, 76% 15%, 78% 0%, 80% 15%, 82% 0%,
+        84% 15%, 86% 0%, 88% 15%, 90% 0%, 92% 15%, 94% 0%,
+        96% 15%, 98% 0%, 100% 15%, 100% 100%, 0% 100%
+    );
+}
+
+.gofrado-border {
+    border: 3px solid transparent;
+    border-image: radial-gradient(#dbdddd 0.3px, transparent 0.3px) 3;
+    border-image-repeat: round;
+    border-image-slice: 3;
+}
+
+/* ── Decorative ── */
+.scribble-underline {
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 5 Q 10 0, 20 5 T 40 5 T 60 5 T 80 5 T 100 5' stroke='%23576100' fill='transparent' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-position: bottom;
+    padding-bottom: 4px;
+}
+
+.scribble {
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: #D8EF00;
+}
+
+.highlighter-stroke {
+    background-color: rgba(216, 239, 0, 0.7);
+    box-shadow: 2px 2px 10px rgba(216, 239, 0, 0.3);
+}
+
+/* ── Interactive ── */
+.ink-stamp {
+    border: 2px solid #576100;
+    transition: all 0.2s ease;
+    position: relative;
+}
+.ink-stamp:active {
+    transform: scale(0.95) rotate(-2deg);
+    background-color: rgba(87, 97, 0, 0.05);
+}
+
+.marker-active {
+    position: relative;
+    z-index: 1;
+}
+.marker-active::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-1deg);
+    width: 110%;
+    height: 90%;
+    background-color: #D8EF00;
+    z-index: -1;
+    opacity: 0.9;
+}
+
+.handwritten-input::placeholder {
+    font-style: italic;
+    opacity: 0.5;
+    letter-spacing: 0.05em;
+}
+
+/* ── Auth panels ── */
+.auth-panel { display: none; }
+.auth-panel.active { display: block; }
+
+.auth-tab-btn {
+    background: transparent;
+    color: #757777;
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 12px;
+    transition: all 0.15s;
+}
+.auth-tab-btn.active {
+    background: #e0f818;
+    color: #414900;
+}
+.auth-tab-btn:hover:not(.active) {
+    background: rgba(216, 239, 0, 0.15);
+}
+
+/* ── Toast notifications ── */
+#toastWrap {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 200;
+    display: grid;
+    gap: 10px;
+    max-width: min(92vw, 360px);
+}
+.toast {
+    background: #f6f6f6;
+    border: 1px solid #acadad;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.12);
+}
+.toast.success { border-left: 3px solid #576100; color: #414900; }
+.toast.error   { border-left: 3px solid #b02500; color: #b02500; }
+.toast.info    { border-left: 3px solid #576100; }
+.toast small   { display: block; margin-top: 4px; font-size: 11px; opacity: 0.7; }
+
+/* ── Loading overlay ── */
+#loadingOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 15, 15, 0.72);
+    backdrop-filter: blur(3px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 150;
+}
+.loading-card {
+    background: #f6f6f6;
+    padding: 28px 36px;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    box-shadow: 8px 8px 0 rgba(0,0,0,0.2);
+    min-width: 220px;
+}
+.loading-title {
+    font-weight: 900;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #2d2f2f;
+    margin-top: 4px;
+}
+.loading-sub {
+    font-size: 12px;
+    color: #757777;
+    margin-top: 4px;
+    font-weight: 600;
+}
+.spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid #dbdddd;
+    border-top-color: #576100;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 12px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Fatal error ── */
+#fatalErrorBox {
+    display: none;
+    background: #f95630;
+    color: #fff;
+    padding: 14px 18px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 12px;
+}

@@ -1,12 +1,263 @@
-<!DOCTYPE html><html lang="pt-BR"><head><base href="./" /><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Planilha Financeira • Dashboard</title><meta name="theme-color" content="#4f46e5" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" /><link rel="stylesheet" href="./css/app.css" /><script>
-(function(){
-  var t = localStorage.getItem('pf28_tema');
-  // Se não tiver tema salvo ou for light, força dark
-  if (!t || t === 'light') { t = 'dark'; try { localStorage.setItem('pf28_tema', 'dark'); } catch(e){} }
-  document.documentElement.setAttribute('data-theme', t);
-})();
-</script></head><body data-page="dashboard" class="page-shell"><div class="container"><header class="topbar"><div class="top-left"><h1>Planilha Financeira</h1><p>Resumo do mês com foco no que realmente importa: saldo, meta e leitura rápida do período.</p></div><div class="top-right"><button id="themeToggle" class="theme-btn"><span class="material-symbols-outlined">contrast</span></button><div id="userArea" class="user-area"><div id="topUserInfo" class="top-user-info">Logado como: <span></span></div><button id="btnSairHeader" class="btn-sair-header">Sair</button></div></div></header><nav class="navbar"><button class="nav-btn active" data-target="dashboard"><span class="nav-icon material-symbols-outlined">dashboard</span><span>Dashboard</span></button><button class="nav-btn" data-target="lancamentos"><span class="nav-icon material-symbols-outlined">account_balance_wallet</span><span>Lançamentos</span></button><button class="nav-btn" data-target="pesquisa"><span class="nav-icon material-symbols-outlined">search</span><span>Pesquisa</span></button><button class="nav-btn" data-target="admin"><span class="nav-icon material-symbols-outlined">shield_person</span><span>Admin</span></button></nav><div id="fatalErrorBox" class="fatal-error"></div><div class="page-actions"><div class="helper-box" style="margin:0;">Abertura mais leve: cada área agora carrega separadamente.</div><div class="toolbar"><div class="toolbar-item month-field"><label >Planilha do mês</label><div class="month-picker" data-hidden="planilhaMes"><select id="planilhaMesMes" class="month-select" aria-label="Selecionar mês"></select><select id="planilhaMesAno" class="year-select" aria-label="Selecionar ano"></select></div><input id="planilhaMes" type="hidden" /></div><button class="btn-neutral month-reset-btn" id="btnMesAtual" type="button" hidden>Mês atual</button></div></div><div class="grid-resumo"><div class="card resumo"><div class="label">Receitas</div><div class="value" id="totalReceitas">R$ 0,00</div><div class="sub">Entradas do mês</div></div><div class="card resumo"><div class="label">Despesas</div><div class="value" id="totalDespesas">R$ 0,00</div><div class="sub">Saídas e compromissos</div></div><div class="card resumo"><div class="label">Saldo livre</div><div class="value" id="saldo">R$ 0,00</div><div class="sub" id="saldoTexto">Situação do orçamento</div></div><div class="card resumo"><div class="label">Meta</div><div class="value" id="metaExibicao">R$ 0,00</div><div class="sub" id="metaResumo">0% atingido</div></div></div><div class="layout"><div class="main-col stack"><div class="card section"><div class="section-title-row"><div><h2>Visão do período</h2><div class="section-subtitle">Últimos 6 meses até a planilha selecionada.</div></div><div id="periodoAtualDescricao" class="section-subtitle">-</div></div><svg id="periodoChart" viewBox="0 0 640 220" style="width:100%;height:auto;display:block;"></svg></div><div class="panel-grid"><div class="subcard"><div class="title">Saldo do período</div><div class="number" id="insightSaldoPeriodo">R$ 0,00</div><div class="desc" id="insightComparativoSaldo">Sem comparação ainda.</div></div><div class="subcard"><div class="title">Maior categoria</div><div class="number" id="insightMaiorCategoria">-</div><div class="desc" id="insightMaiorCategoriaValor">Nenhum gasto no período.</div></div><div class="subcard"><div class="title">Movimentações</div><div class="number" id="insightQtdPeriodo">0</div><div class="desc" id="insightQtdDetalhe">0 receitas • 0 saídas • 0 parcelas</div></div><div class="subcard"><div class="title">Mês ativo</div><div class="number" id="planilhaMesLabel">-</div><div class="desc">Persistido no navegador</div></div></div></div><aside class="side-col stack"><div class="card section"><div class="panel-head"><div><div class="eyebrow">Meta</div><h2 style="margin-top:10px;">Sua reserva</h2><div class="section-subtitle">Defina o objetivo e registre depósitos sem editar o total manualmente.</div></div></div><div class="segment meta-segment"><button class="segment-btn active" type="button" data-meta-tab="meta">Meta</button><button class="segment-btn" type="button" data-meta-tab="deposito">Depósito</button></div><div id="metaTabMeta" class="meta-tab-panel"><label for="metaInput">Quanto deseja economizar?</label><input id="metaInput" type="number" step="0.01" value="1000" /><div class="meta-box" style="margin-top:14px;"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;"><div><div class="title" style="font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800;">Progresso</div><div id="metaPercentual" style="font-size:26px;font-weight:800;letter-spacing:-.04em;">0%</div></div><div style="text-align:right;"><div class="title" style="font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800;">Depositado</div><div id="metaDepositadoResumo" style="font-size:18px;font-weight:800;">R$ 0,00</div></div></div><div class="progress" style="margin-top:12px;"><div class="progress-bar" id="barraMeta"></div></div><div id="mensagemMeta" class="section-subtitle" style="margin-top:12px;">Você ainda não registrou depósitos nesta meta.</div><div id="alertaMetaBox" class="helper-box compact" style="margin:12px 0 0;">Acompanhe sua evolução de meta por aqui.</div><div class="inline-kpis" style="margin-top:12px;"><div class="inline-kpi"><div class="kpi-label">Meta definida</div><div class="kpi-value" id="metaValorResumo">R$ 0,00</div></div><div class="inline-kpi"><div class="kpi-label">Depositado</div><div class="kpi-value" id="metaDepositadoResumoCard">R$ 0,00</div></div><div class="inline-kpi"><div class="kpi-label">Restante</div><div class="kpi-value" id="metaRestanteResumo">R$ 0,00</div></div></div></div></div><div id="metaTabDeposito" class="meta-tab-panel" style="display:none;"><label for="depositoMetaInput">Quanto deseja adicionar agora?</label><input id="depositoMetaInput" type="number" step="0.01" value="" placeholder="Ex.: 100,00" /><div class="meta-deposito-actions"><button id="btnAdicionarDepositoMeta" class="btn-primary" type="button">Adicionar depósito</button><button id="btnPreencherRestanteMeta" class="btn-neutral" type="button">Completar restante</button></div><div class="helper-box compact">O valor informado aqui é somado ao total já depositado.</div></div></div><div class="card section"><div class="panel-head"><div><div class="eyebrow">Categorias</div><h2 style="margin-top:10px;">Onde o dinheiro pesa</h2><div class="section-subtitle">Leitura rápida dos gastos do mês.</div></div></div><div id="categoriasBox"></div></div></aside></div><div class="rodape">Mais foco visual, menos blocos competindo entre si.</div></div><div id="toastWrap" class="toast-wrap"></div><div id="loadingOverlay" class="loading-overlay"><div class="loading-card"><div class="spinner"></div><div class="loading-title" id="loadingTitle">Carregando</div><div class="loading-sub" id="loadingSub">Só um instante.</div></div></div><script src="./js/config.js"></script><script src="./js/supabase-lite.js"></script><script src="./js/common.js"></script><script src="./js/app.js"></script></body></html>
+<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GuardanapON — Cockpit</title>
+  <meta name="theme-color" content="#D8EF00"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary":               "#576100",
+            "primary-container":     "#e0f818",
+            "on-primary-fixed":      "#414900",
+            "on-primary-container":  "#525c00",
+            "outline":               "#757777",
+            "outline-variant":       "#acadad",
+            "surface":               "#f6f6f6",
+            "surface-dim":           "#d2d5d5",
+            "surface-container-low": "#f0f1f1",
+            "surface-container":     "#e7e8e8",
+            "on-surface":            "#2d2f2f",
+            "on-background":         "#2d2f2f",
+            "secondary":             "#5c5b5b",
+            "secondary-dim":         "#504f4f",
+            "inverse-surface":       "#0c0f0f",
+          },
+          fontFamily: { body: ["Space Grotesk", "sans-serif"] },
+          borderRadius: { DEFAULT: "0px", lg: "0px", xl: "0px", full: "9999px" },
+        },
+      },
+    }
+  </script>
+  <link rel="stylesheet" href="./css/stitch.css"/>
+  <style>
+    body { background-color: #0c0f0f; }
+  </style>
+</head>
+<body class="font-body text-on-surface min-h-screen">
+
+  <!-- Fatal error -->
+  <div id="fatalErrorBox" style="position:fixed;top:5rem;left:1rem;right:1rem;z-index:300;"></div>
+
+  <!-- ── Top App Bar ── -->
+  <header class="fixed top-0 left-0 right-0 z-50 m-2">
+    <div class="bg-surface shadow-[0_4px_12px_rgba(12,15,15,0.08)] rotate-[-0.3deg] flex items-center justify-between px-5 py-3">
+      <div class="flex items-center gap-4">
+        <!-- Hidden nav buttons required by app.js -->
+        <nav class="hidden">
+          <button class="nav-btn" data-target="dashboard"></button>
+          <button class="nav-btn" data-target="lancamentos"></button>
+          <button class="nav-btn" data-target="pesquisa"></button>
+          <button class="nav-btn" data-target="admin"></button>
+        </nav>
+
+        <button class="text-primary hover:bg-[#D8EF00]/20 transition-colors p-1.5">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+        <a href="dashboard.html" class="text-xl font-black text-[#0c0f0f] uppercase tracking-tighter">GuardanapON</a>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <!-- Session earnings (driven by app.js updateUserBar) -->
+        <div class="flex flex-col items-end">
+          <span class="text-[9px] uppercase tracking-widest font-bold text-primary opacity-60">Sessão</span>
+          <div id="topUserInfo" class="text-sm font-black text-on-background">
+            <span>—</span>
+          </div>
+        </div>
+
+        <!-- Logout -->
+        <button id="btnSairHeader"
+          class="bg-[#D8EF00] text-primary font-black text-[10px] uppercase tracking-widest px-3 py-1.5 hover:brightness-95 transition-all shadow-[2px_2px_0_#576100]">
+          Sair
+        </button>
+
+        <!-- Hidden theme toggle (required by app.js initStaticEvents) -->
+        <button id="themeToggle" style="display:none;"></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Main Content ── -->
+  <main class="pt-28 pb-40 px-4 max-w-5xl mx-auto flex flex-col gap-10">
+
+    <!-- Main Napkin -->
+    <section class="bg-surface gofrado-border shadow-2xl relative p-8 md:p-12 rotate-[0.2deg]">
+
+      <!-- Header row -->
+      <div class="flex flex-col md:flex-row justify-between items-start gap-6 mb-14">
+        <div>
+          <h2 class="text-4xl md:text-5xl font-black tracking-tighter text-on-background mb-1">Musician's Cockpit</h2>
+          <p class="text-primary font-medium italic opacity-70 text-sm">Bem-vindo ao seu painel de apresentação</p>
+        </div>
+
+        <!-- Status pinned note -->
+        <div class="bg-white p-4 rotate-[-2deg] shadow-lg border-l-4 border-primary-container relative flex-shrink-0">
+          <span class="material-symbols-outlined absolute -top-3 -right-2 text-secondary rotate-45 scale-75">push_pin</span>
+          <p class="text-[9px] font-bold uppercase tracking-widest mb-1 text-outline">Status atual</p>
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 bg-primary-container animate-pulse"></div>
+            <span class="font-bold text-base">ON STAGE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Pedidos Pagos ── -->
+      <div class="mb-14" id="secaoPedidosPagos">
+        <div class="flex items-center gap-4 mb-7">
+          <h3 class="text-xl font-black uppercase tracking-tight bg-primary-container px-4 py-1 rotate-[-1deg] text-on-primary-fixed">
+            Pedidos Pagos
+          </h3>
+          <div class="h-px flex-1 border-b border-dashed border-outline-variant"></div>
+        </div>
+
+        <div id="listaPedidosPagos" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- Cards renderizados dinamicamente -->
+          <div class="bg-surface-container-low p-5 shadow-md rotate-[0.4deg] flex gap-4 items-center group hover:bg-white transition-all cursor-pointer relative overflow-hidden opacity-50">
+            <div class="absolute top-0 right-0 w-10 h-10 bg-primary-container flex items-center justify-center rotate-45 translate-x-5 -translate-y-5">
+              <span class="material-symbols-outlined text-primary -rotate-45 text-xs">star</span>
+            </div>
+            <div class="w-16 h-16 bg-surface-dim flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-outline doodle-icon">music_note</span>
+            </div>
+            <div class="flex-grow">
+              <h4 class="font-black text-lg leading-tight">Sem pedidos pagos</h4>
+              <p class="text-xs opacity-50 font-bold uppercase tracking-widest mt-1">ainda esta sessão</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Votação Gratuita ── -->
+      <div id="secaoVotacao">
+        <div class="flex items-center gap-4 mb-7">
+          <h3 class="text-xl font-black uppercase tracking-tight border-2 border-on-background px-4 py-1 rotate-[0.5deg]">
+            Votação Gratuita
+          </h3>
+          <div class="h-px flex-1 border-b border-dashed border-outline-variant"></div>
+        </div>
+
+        <div id="listaVotacaoGratuita" class="space-y-3">
+          <!-- Placeholder: sem votos -->
+          <div class="flex items-center justify-between p-4 bg-white/50 border-b border-outline-variant">
+            <div class="flex items-center gap-5">
+              <span class="text-3xl font-black opacity-10 italic">01</span>
+              <div>
+                <h4 class="font-bold text-base opacity-50">Nenhuma votação ainda</h4>
+                <p class="text-[10px] opacity-40 font-bold uppercase tracking-widest">Compartilhe o link para os clientes votarem</p>
+              </div>
+            </div>
+            <a href="busca.html"
+              class="border border-outline px-4 py-2 font-black text-xs uppercase hover:bg-primary-container hover:border-primary-container transition-all">
+              Ver Busca →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tear decoration -->
+      <div class="absolute -bottom-4 left-0 w-full h-8 tear-bottom bg-surface pointer-events-none"></div>
+    </section>
+
+    <!-- Musician note -->
+    <div class="self-end max-w-xs rotate-[1.5deg]">
+      <div class="bg-primary-container p-5 shadow-xl relative tear-bottom">
+        <span class="material-symbols-outlined absolute -top-4 left-4 text-primary scale-125">bookmark</span>
+        <p class="font-black text-on-primary-fixed uppercase text-[10px] mb-3 tracking-widest">Nota do músico</p>
+        <p class="text-on-primary-fixed font-medium italic leading-snug text-sm">
+          "Compartilhe o link da busca para o público votar nas músicas em tempo real!"
+        </p>
+      </div>
+    </div>
+
+    <!-- Link para busca pública -->
+    <div class="flex justify-center">
+      <a href="busca.html"
+        class="flex items-center gap-2 bg-[#D8EF00] text-primary font-black uppercase tracking-[0.15em] text-xs px-6 py-3 shadow-[4px_4px_0_#576100] hover:brightness-105 active:scale-95 transition-all">
+        <span class="material-symbols-outlined text-base">open_in_new</span>
+        Abrir tela de votação pública
+      </a>
+    </div>
+
+  </main>
+
+  <!-- ── Bottom Navigation ── -->
+  <nav class="fixed bottom-0 left-0 w-full h-24 flex justify-around items-end pb-4 px-4 bg-surface z-50 tear-top border-t-2 border-[#dbdddd]/30 shadow-[0_-8px_24px_rgba(0,0,0,0.1)]">
+    <button onclick="window.location.href='dashboard.html'"
+      class="flex flex-col items-center justify-center px-4 py-2 transition-all marker-active">
+      <span class="material-symbols-outlined doodle-icon text-on-surface">music_note</span>
+      <span class="text-[9px] font-bold uppercase tracking-widest text-on-surface">Cockpit</span>
+    </button>
+    <a href="busca.html"
+      class="flex flex-col items-center justify-center px-4 py-2 text-secondary-dim opacity-60 hover:opacity-100 transition-all">
+      <span class="material-symbols-outlined doodle-icon">search</span>
+      <span class="text-[9px] font-bold uppercase tracking-widest">Busca</span>
+    </a>
+    <button class="flex flex-col items-center justify-center px-4 py-2 text-secondary-dim opacity-60 hover:opacity-100 transition-all">
+      <span class="material-symbols-outlined doodle-icon">inventory_2</span>
+      <span class="text-[9px] font-bold uppercase tracking-widest">Arquivo</span>
+    </button>
+    <a href="admin.html"
+      class="flex flex-col items-center justify-center px-4 py-2 text-secondary-dim opacity-60 hover:opacity-100 transition-all" id="btnAdminNav" style="display:none;">
+      <span class="material-symbols-outlined doodle-icon">shield_person</span>
+      <span class="text-[9px] font-bold uppercase tracking-widest">Admin</span>
+    </a>
+  </nav>
+
+  <!-- FAB -->
+  <button
+    class="fixed bottom-28 right-6 bg-primary-container text-on-primary-fixed w-14 h-14 shadow-2xl flex items-center justify-center group rotate-[-3deg] hover:rotate-0 transition-transform z-40"
+    title="Adicionar música manualmente">
+    <span class="material-symbols-outlined text-3xl">add</span>
+    <span class="absolute right-full mr-3 bg-on-background text-surface px-3 py-1 text-[9px] font-bold uppercase tracking-widest whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+      Adicionar música
+    </span>
+  </button>
+
+  <!-- Toast & Loading -->
+  <div id="toastWrap"></div>
+  <div id="loadingOverlay">
+    <div class="loading-card">
+      <div class="spinner"></div>
+      <div id="loadingTitle" class="loading-title">Carregando</div>
+      <div id="loadingSub" class="loading-sub">Só um instante.</div>
+    </div>
+  </div>
+
+  <!-- Hidden elements required by app.js (month picker, meta, etc.) -->
+  <div style="display:none">
+    <input id="planilhaMes" type="hidden"/>
+    <select id="planilhaMesMes"></select>
+    <select id="planilhaMesAno"></select>
+    <input id="metaInput" type="number" value="1000"/>
+    <input id="depositoMetaInput" type="number"/>
+    <select id="pesquisaMesMes"></select>
+    <select id="pesquisaMesAno"></select>
+    <input id="pesquisaMes" type="hidden"/>
+  </div>
+
+  <script src="./js/config.js"></script>
+  <script src="./js/supabase-lite.js"></script>
+  <script src="./js/common.js"></script>
+  <script src="./js/app.js"></script>
+  <script>
+    // Mostra link admin no nav se o usuário for admin
+    document.addEventListener('DOMContentLoaded', function() {
+      var checkAdmin = setInterval(function() {
+        if (window.AppState && window.AppState.adminAtivo) {
+          var btn = document.getElementById('btnAdminNav');
+          if (btn) btn.style.display = 'flex';
+          clearInterval(checkAdmin);
+        }
+      }, 500);
+    });
+  </script>
+</body>
+</html>
