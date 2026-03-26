@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html class="light" lang="pt-BR">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -9,25 +9,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
   <script>
     tailwind.config = {
+      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "wood":        "#7a5c42",
-            "napkin":      "#fafaf8",
-            "napkin-cream":"#f5f0e8",
-            "linen":       "#e8e0d0",
-            "linen-dark":  "#d0c4b0",
-            "hemstitch":   "#c8bfaf",
-            "ink":         "#2c1a10",
-            "ink-muted":   "#8b7355",
-            "ink-faint":   "#c4b8a8",
-            "stitch":      "#7a9aaa",
-            "stitch-light":"#dce8ee",
-            "stitch-dark": "#4a6a7a",
-            "embroidery":  "#7a5040",
-            "embroidery-lt":"#c4a882",
-            "error":       "#c0533a",
-            "error-soft":  "#f5e8e4",
+            "primary":              "#576100",
+            "primary-container":    "#e0f818",
+            "on-primary-fixed":     "#414900",
+            "on-primary-container": "#525c00",
+            "outline":              "#757777",
+            "outline-variant":      "#acadad",
+            "surface":              "#f6f6f6",
+            "surface-dim":          "#d2d5d5",
+            "on-surface":           "#2d2f2f",
+            "on-background":        "#2d2f2f",
+            "inverse-surface":      "#0c0f0f",
+            "surface-container-low":"#f0f1f1",
           },
           fontFamily: { body: ["Space Grotesk", "sans-serif"] },
           borderRadius: { DEFAULT: "0px", lg: "0px", xl: "0px", full: "9999px" },
@@ -38,115 +35,106 @@
   <link rel="stylesheet" href="./css/stitch.css"/>
   <style>
     body {
+      background-color: #0c0f0f;
       min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: "Space Grotesk", sans-serif;
-      padding: 2rem 1rem 3rem;
+      padding: 1.5rem 1rem 2rem;
       overflow-x: hidden;
     }
   </style>
 </head>
-<body class="wood-bg">
+<body>
 
+  <!-- Fatal error -->
   <div id="fatalErrorBox" style="position:fixed;top:1rem;left:1rem;right:1rem;z-index:300;"></div>
 
-  <!-- Main Napkin Card -->
-  <main class="relative w-full max-w-[440px] rotate-[-0.6deg] hover:rotate-0 transition-transform duration-500 z-10">
+  <!-- Main Napkin -->
+  <main class="relative w-full max-w-[480px] shadow-[0_20px_48px_rgba(0,0,0,0.55)] rotate-[-0.8deg] hover:rotate-0 transition-transform duration-500 z-10">
 
-    <!-- Napkin surface with hemstitch border -->
-    <div class="napkin-card hemstitch-border napkin-shadow p-10 md:p-12 flex flex-col gap-7 relative overflow-hidden">
+    <!-- Gofrado texture border -->
+    <div class="absolute inset-0 bg-surface gofrado-pattern pointer-events-none"></div>
 
-      <!-- Top fold shadow line -->
-      <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-b from-black/5 to-transparent pointer-events-none"></div>
+    <!-- Napkin core -->
+    <div class="relative bg-surface p-8 md:p-10 flex flex-col gap-7">
 
-      <!-- Paperclip -->
-      <span class="material-symbols-outlined absolute -top-2 right-12 text-ink-faint text-4xl rotate-[40deg] pointer-events-none z-20" style="font-variation-settings:'FILL' 0,'wght' 200,'GRAD' 0,'opsz' 24">attach_file</span>
+      <!-- Paperclip decoration -->
+      <span class="material-symbols-outlined absolute -top-3 right-10 text-[#acadad] text-4xl rotate-45 pointer-events-none z-20" style="font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24">attach_file</span>
 
       <!-- Header -->
-      <div class="text-center pt-1">
-        <div class="inline-block relative mb-1">
-          <h1 class="text-3xl font-black text-ink uppercase tracking-tighter">GuardanapON</h1>
-          <!-- Embroidery underline -->
-          <div class="absolute -bottom-1 left-2 right-2 flex flex-col gap-[3px]">
-            <div class="h-[1.5px] bg-embroidery-lt"></div>
-            <div class="h-[1px] bg-embroidery opacity-70"></div>
-          </div>
+      <div class="text-center pt-2">
+        <div class="inline-block relative">
+          <h1 class="text-4xl font-black text-[#0c0f0f] uppercase tracking-tighter font-body">GuardanapON</h1>
+          <div class="absolute -bottom-1 left-0 w-full h-3 bg-[#D8EF00] -z-10 rotate-[-0.5deg]"></div>
         </div>
-        <p class="mt-4 text-ink-muted text-[10px] font-bold tracking-[0.22em] uppercase">
-          Acesse sua conta
-        </p>
+        <p class="mt-4 text-primary text-[10px] font-bold tracking-[0.2em] uppercase opacity-60">Acesse sua conta</p>
       </div>
 
       <!-- Tabs -->
-      <div class="flex border border-linen-dark overflow-hidden">
+      <div class="flex border border-outline-variant">
         <button class="auth-tab-btn active flex-1" data-auth-tab="entrar">Entrar</button>
-        <button class="auth-tab-btn flex-1 border-l border-linen-dark" data-auth-tab="cadastrar">Cadastrar</button>
+        <button class="auth-tab-btn flex-1 border-l border-outline-variant" data-auth-tab="cadastrar">Cadastrar</button>
       </div>
 
       <!-- ── PANEL: Entrar ── -->
       <div class="auth-panel active" id="painelEntrar">
-        <div class="space-y-6">
+        <div class="space-y-5">
           <div>
-            <label class="block text-[10px] font-bold uppercase tracking-[0.15em] text-ink-muted mb-2">Usuário</label>
+            <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Usuário</label>
             <input id="loginUsuario" type="text" autocomplete="username"
-              class="napkin-input handwritten-input"
+              class="handwritten-input w-full bg-transparent border-0 border-b-2 border-[#0c0f0f] focus:ring-0 focus:border-[#D8EF00] px-0 py-2 text-on-surface font-medium text-lg transition-colors"
               placeholder="seu_usuario"/>
-            <div id="erroLoginUsuario" class="text-error text-[11px] font-bold mt-1 min-h-[16px]"></div>
+            <div id="erroLoginUsuario" class="text-[#b02500] text-[11px] font-bold mt-1 min-h-[16px]"></div>
           </div>
           <div>
-            <label class="block text-[10px] font-bold uppercase tracking-[0.15em] text-ink-muted mb-2">Senha</label>
+            <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Senha</label>
             <input id="loginSenha" type="password" autocomplete="current-password"
-              class="napkin-input"
+              class="w-full bg-transparent border-0 border-b-2 border-[#0c0f0f] focus:ring-0 focus:border-[#D8EF00] px-0 py-2 text-on-surface font-medium text-lg transition-colors"
               placeholder="••••••••"/>
-            <div id="erroLoginSenha" class="text-error text-[11px] font-bold mt-1 min-h-[16px]"></div>
+            <div id="erroLoginSenha" class="text-[#b02500] text-[11px] font-bold mt-1 min-h-[16px]"></div>
           </div>
 
-          <div id="erroLoginForm" class="text-error text-sm font-bold min-h-[18px]"></div>
+          <div id="erroLoginForm" class="text-[#b02500] text-sm font-bold min-h-[18px]"></div>
 
-          <button id="btnEntrar" class="btn-napkin w-full py-4 text-sm tracking-[0.18em]">
+          <button id="btnEntrar"
+            class="w-full bg-[#D8EF00] py-4 text-primary font-black uppercase tracking-[0.2em] text-sm hover:brightness-105 active:scale-[0.98] transition-all shadow-[4px_4px_0px_#576100]">
             Entrar no Painel
           </button>
 
           <!-- Divider -->
           <div class="flex items-center gap-3">
-            <div class="h-px flex-1 bg-linen-dark"></div>
-            <span class="text-[10px] font-medium text-ink-faint italic">ou continue com</span>
-            <div class="h-px flex-1 bg-linen-dark"></div>
+            <div class="h-px flex-1 bg-outline-variant opacity-40"></div>
+            <span class="text-[10px] font-bold uppercase tracking-tighter text-outline italic">ou entre com</span>
+            <div class="h-px flex-1 bg-outline-variant opacity-40"></div>
           </div>
 
           <!-- Google -->
           <button id="btnGoogleLogin"
-            class="btn-napkin-outline w-full flex items-center justify-center gap-3 py-3 text-[10px] tracking-widest">
-            <svg width="16" height="16" viewBox="0 0 24 24">
-              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
-              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-            </svg>
+            class="ink-stamp w-full flex items-center justify-center gap-3 py-3 bg-white text-[11px] font-black uppercase tracking-widest text-primary hover:bg-[#D8EF00]/10 transition-colors">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
             Continuar com Google
           </button>
 
           <!-- Esqueci senha -->
           <div class="text-center">
             <button id="btnMostrarReset"
-              class="text-[10px] font-bold uppercase tracking-widest text-ink-faint hover:text-stitch transition-colors">
+              class="text-[10px] font-bold uppercase tracking-widest text-outline hover:text-primary transition-colors">
               Esqueci minha senha
             </button>
           </div>
 
           <!-- Reset box -->
-          <div id="resetBox" style="display:none;"
-            class="bg-napkin-cream border border-dashed border-hemstitch p-4 space-y-3">
-            <p class="text-[10px] font-bold uppercase tracking-widest text-ink-muted">Recuperar acesso</p>
+          <div id="resetBox" style="display:none;" class="border border-dashed border-outline-variant p-4 space-y-3">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-primary">Recuperar acesso</p>
             <input id="resetUsuarioEmail" type="text"
-              class="napkin-input text-base"
+              class="w-full bg-transparent border-0 border-b border-outline px-0 py-2 text-on-surface font-medium focus:ring-0 focus:border-primary transition-colors"
               placeholder="Usuário ou email"/>
-            <div id="erroResetForm" class="text-error text-[11px] font-bold min-h-[16px]"></div>
+            <div id="erroResetForm" class="text-[#b02500] text-[11px] font-bold min-h-[16px]"></div>
             <button id="btnResetSenha"
-              class="text-[10px] font-black uppercase tracking-widest text-stitch hover:text-stitch-dark transition-colors">
-              Enviar link →
+              class="text-[10px] font-black uppercase tracking-widest text-primary hover:underline decoration-[#D8EF00]">
+              Enviar link de recuperação →
             </button>
           </div>
         </div>
@@ -154,62 +142,60 @@
 
       <!-- ── PANEL: Cadastrar ── -->
       <div class="auth-panel" id="painelCadastrar">
-        <div class="space-y-6">
+        <div class="space-y-5">
           <div>
-            <label class="block text-[10px] font-bold uppercase tracking-[0.15em] text-ink-muted mb-2">Nome de Usuário</label>
+            <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Nome de Usuário</label>
             <input id="cadastroUsuario" type="text" autocomplete="username"
-              class="napkin-input handwritten-input"
+              class="handwritten-input w-full bg-transparent border-0 border-b-2 border-[#0c0f0f] focus:ring-0 focus:border-[#D8EF00] px-0 py-2 text-on-surface font-medium text-lg transition-colors"
               placeholder="seu_usuario"/>
-            <div id="erroCadastroUsuario" class="text-error text-[11px] font-bold mt-1 min-h-[16px]"></div>
+            <div id="erroCadastroUsuario" class="text-[#b02500] text-[11px] font-bold mt-1 min-h-[16px]"></div>
           </div>
           <div>
-            <label class="block text-[10px] font-bold uppercase tracking-[0.15em] text-ink-muted mb-2">Senha</label>
+            <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Senha</label>
             <input id="cadastroSenha" type="password" autocomplete="new-password"
-              class="napkin-input"
+              class="w-full bg-transparent border-0 border-b-2 border-[#0c0f0f] focus:ring-0 focus:border-[#D8EF00] px-0 py-2 text-on-surface font-medium text-lg transition-colors"
               placeholder="mínimo 6 caracteres"/>
-            <div id="erroCadastroSenha" class="text-error text-[11px] font-bold mt-1 min-h-[16px]"></div>
+            <div id="erroCadastroSenha" class="text-[#b02500] text-[11px] font-bold mt-1 min-h-[16px]"></div>
           </div>
-          <div id="erroCadastroForm" class="text-error text-sm font-bold min-h-[18px]"></div>
-          <button id="btnCadastrar" class="btn-napkin w-full py-4 text-sm tracking-[0.18em]">
+
+          <div id="erroCadastroForm" class="text-[#b02500] text-sm font-bold min-h-[18px]"></div>
+
+          <button id="btnCadastrar"
+            class="w-full bg-[#D8EF00] py-4 text-primary font-black uppercase tracking-[0.2em] text-sm hover:brightness-105 active:scale-[0.98] transition-all shadow-[4px_4px_0px_#576100]">
             Cadastrar e Continuar
           </button>
         </div>
       </div>
 
-      <!-- ── Update Password ── -->
-      <div id="updatePasswordBox" style="display:none;"
-        class="bg-napkin-cream border border-dashed border-hemstitch p-4 space-y-4">
-        <p class="text-[10px] font-bold uppercase tracking-widest text-ink-muted">Nova senha</p>
+      <!-- ── Update Password Box (force-reset) ── -->
+      <div id="updatePasswordBox" style="display:none;" class="border border-dashed border-outline-variant p-4 space-y-4">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-primary">Defina uma nova senha</p>
         <input id="novaSenha" type="password"
-          class="napkin-input"
+          class="w-full bg-transparent border-0 border-b border-outline px-0 py-2 text-on-surface font-medium focus:ring-0 focus:border-primary transition-colors"
           placeholder="Nova senha (mín. 6 caracteres)"/>
-        <div id="erroNovaSenha" class="text-error text-[11px] font-bold min-h-[16px]"></div>
+        <div id="erroNovaSenha" class="text-[#b02500] text-[11px] font-bold min-h-[16px]"></div>
         <div id="erroSalvarSenha" class="text-[11px] font-bold min-h-[16px]"></div>
-        <button id="btnSalvarNovaSenha" class="btn-napkin px-6 py-2 text-xs">
-          Salvar Senha
+        <button id="btnSalvarNovaSenha"
+          class="bg-[#D8EF00] px-6 py-2 text-primary font-black uppercase tracking-widest text-[10px] shadow-[3px_3px_0px_#576100] hover:brightness-105 active:scale-95 transition-all">
+          Salvar Nova Senha
         </button>
       </div>
 
       <!-- Footer -->
-      <p class="text-[9px] uppercase tracking-[0.28em] text-center text-ink-faint pt-1">
+      <p class="text-[9px] uppercase tracking-[0.25em] text-center opacity-25 font-bold pt-2">
         GuardanapON • Live Music Platform
       </p>
-
-      <!-- Bottom fold shadow line -->
-      <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-t from-black/6 to-transparent pointer-events-none"></div>
     </div>
-
-    <!-- Cast shadow beneath napkin (simulates it lying on the table) -->
-    <div class="absolute -bottom-3 left-4 right-4 h-6 bg-black/15 blur-md -z-10 rounded-full"></div>
   </main>
 
-  <!-- Ambient rings (wood table decoration) -->
-  <div class="fixed bottom-8 left-8 w-32 h-32 rounded-full border border-white/5 pointer-events-none"></div>
-  <div class="fixed top-12 right-12 w-48 h-48 rounded-full border border-white/4 pointer-events-none"></div>
+  <!-- Background coffee ring -->
+  <div class="fixed -bottom-24 -left-24 w-80 h-80 rounded-full border-4 border-[#D8EF00] opacity-5 pointer-events-none"></div>
+  <div class="fixed -top-16 -right-16 w-56 h-56 rounded-full border-2 border-[#D8EF00] opacity-5 pointer-events-none"></div>
 
-  <!-- Hidden theme toggle -->
+  <!-- Hidden theme toggle (required by common.js/auth.js) -->
   <button id="themeToggle" style="display:none;position:absolute;"></button>
 
+  <!-- Toast & Loading -->
   <div id="toastWrap"></div>
   <div id="loadingOverlay">
     <div class="loading-card">
