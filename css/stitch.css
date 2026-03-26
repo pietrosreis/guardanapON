@@ -13,8 +13,23 @@
 
 /* ── Textures & Shapes ── */
 .gofrado-pattern {
-    background-image: radial-gradient(#dbdddd 0.3px, transparent 0.3px);
-    background-size: 1.5px 1.5px;
+    background-image:
+        radial-gradient(#ccc8bf 0.3px, transparent 0.3px),
+        repeating-linear-gradient(
+            102deg,
+            transparent,
+            transparent 3px,
+            rgba(180,170,150,0.025) 3px,
+            rgba(180,170,150,0.025) 4px
+        ),
+        repeating-linear-gradient(
+            168deg,
+            transparent,
+            transparent 5px,
+            rgba(180,170,150,0.02) 5px,
+            rgba(180,170,150,0.02) 6px
+        );
+    background-size: 1.5px 1.5px, 100% 100%, 100% 100%;
 }
 
 .perforated-top-edge {
@@ -61,9 +76,34 @@
 
 .gofrado-border {
     border: 3px solid transparent;
-    border-image: radial-gradient(#dbdddd 0.3px, transparent 0.3px) 3;
+    border-image: radial-gradient(#ccc8bf 0.3px, transparent 0.3px) 3;
     border-image-repeat: round;
     border-image-slice: 3;
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.6),
+        inset 0 -1px 0 rgba(180,165,140,0.15);
+}
+
+/* ── Paper napkin fold crease ── */
+.paper-crease {
+    position: relative;
+}
+.paper-crease::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    top: 50%;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(180,165,140,0.18) 15%,
+        rgba(180,165,140,0.28) 50%,
+        rgba(180,165,140,0.18) 85%,
+        transparent 100%
+    );
+    pointer-events: none;
 }
 
 /* ── Decorative ── */
