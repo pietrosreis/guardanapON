@@ -46,7 +46,7 @@
   }
   function getStoredPlanilhaMes(){ try { var valor = localStorage.getItem(cfg.STORAGE_KEYS.planilhaMes); return /^\d{4}-\d{2}$/.test(valor || '') ? valor : currentMonthRef(); } catch (error) { return currentMonthRef(); } }
   function setStoredPlanilhaMes(valor){ try { localStorage.setItem(cfg.STORAGE_KEYS.planilhaMes, valor || currentMonthRef()); } catch (error) {} }
-  function usuarioParaAcesso(username){ return String(username || '').toLowerCase() + '@planilhafinanceira.app'; }
+  function usuarioParaAcesso(username){ return String(username || '').toLowerCase() + '@guardanapon.app'; }
   function normalizarEmailOuUsuario(valor){ var texto = String(valor || '').trim(); return !texto ? '' : (texto.indexOf('@') >= 0 ? texto.toLowerCase() : usuarioParaAcesso(texto)); }
   function validarUsuario(username){ var valor = String(username || '').trim(); if (!valor) return 'Informe o nome de usuário.'; if (valor.length < 3) return 'O usuário precisa ter pelo menos 3 caracteres.'; if (!/^[a-zA-Z0-9_.-]+$/.test(valor)) return 'Use apenas letras, números, ponto, traço ou underline.'; return ''; }
   function validarSenha(senha){ if (!senha) return 'Informe a senha.'; if (senha.length < 6) return 'A senha precisa ter pelo menos 6 caracteres.'; return ''; }

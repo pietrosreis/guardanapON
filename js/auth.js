@@ -14,7 +14,7 @@
   async function getSessionUser(){ var result = await supabaseClient.auth.getSession(); return result && result.data && result.data.session && result.data.session.user || null; }
   async function getOwnProfile(userId){
     if (!userId) return null;
-    var result = await supabaseClient.from('user_profiles').select('*').eq('user_id', userId).maybeSingle();
+    var result = await supabaseClient.from('profiles').select('*').eq('id', userId).maybeSingle();
     return result && result.data || null;
   }
   function getRedirectPage(){ return 'dashboard.html'; }
@@ -26,27 +26,11 @@
   async function redirectIfLogged(){
     var user = await getSessionUser();
     var hash = new URLSearchParams(window.location.hash.replace(/^#/, ''));
-    if (hash.get('type') === 'recovery' || isForcedResetHash()) {
+    if (hash.get('type') === 'recovery') {
       showUpdatePasswordBox();
       return;
     }
     if (!user) return;
-    var profile = await getOwnProfile(user.id);
-    if (profile && profile.is_active === false) {
-      await supabaseClient.auth.signOut();
-      setErro('erroLoginForm', 'Seu acesso está desativado. Fale com o administrador.');
-      return;
-    }
-    if (profile && profile.blocked_until && new Date(profile.blocked_until).getTime() > Date.now()) {
-      await supabaseClient.auth.signOut();
-      setErro('erroLoginForm', 'Seu acesso está bloqueado até ' + C.formatarDataHora(profile.blocked_until) + '.');
-      return;
-    }
-    if (profile && profile.force_password_reset) {
-      window.location.hash = 'force-reset';
-      showUpdatePasswordBox();
-      return;
-    }
     window.location.replace(getRedirectPage());
   }
   async function cadastrarUsuario(){
@@ -77,15 +61,6 @@
   }
   async function validarRestricoesPosLogin(user){
     var profile = await getOwnProfile(user && user.id);
-    if (!profile) return { ok:true, profile:null };
-    if (profile.is_active === false) {
-      await supabaseClient.auth.signOut();
-      return { ok:false, message:'Seu acesso está desativado. Fale com o administrador.' };
-    }
-    if (profile.blocked_until && new Date(profile.blocked_until).getTime() > Date.now()) {
-      await supabaseClient.auth.signOut();
-      return { ok:false, message:'Seu acesso está temporariamente bloqueado até ' + C.formatarDataHora(profile.blocked_until) + '.' };
-    }
     return { ok:true, profile:profile };
   }
   async function entrarUsuario(){
@@ -102,19 +77,6 @@
     if (result.error) {
       setErro('erroLoginForm', 'Usuário ou senha incorretos.');
       btn.disabled = false; btn.textContent = 'Entrar no Painel'; return;
-    }
-    var authCheck = await validarRestricoesPosLogin(result.data && result.data.user || await getSessionUser());
-    if (!authCheck.ok) {
-      setErro('erroLoginForm', authCheck.message);
-      btn.disabled = false; btn.textContent = 'Entrar no Painel';
-      return;
-    }
-    if (authCheck.profile && authCheck.profile.force_password_reset) {
-      window.location.hash = 'force-reset';
-      showUpdatePasswordBox();
-      setErro('erroSalvarSenha', 'Defina uma nova senha para continuar.', true);
-      btn.disabled = false; btn.textContent = 'Entrar no Painel';
-      return;
     }
     window.location.replace(getRedirectPage());
   }
@@ -138,10 +100,6 @@
     if (erroSenha) return setErro('erroNovaSenha', erroSenha);
     var result = await supabaseClient.auth.updateUser({ password: senha });
     if (result.error) return setErro('erroSalvarSenha', 'Erro ao salvar nova senha: ' + result.error.message);
-    var user = await getSessionUser();
-    if (user) {
-      await supabaseClient.from('user_profiles').update({ force_password_reset:false, blocked_until:null }).eq('user_id', user.id);
-    }
     setErro('erroSalvarSenha', 'Senha atualizada com sucesso.', true);
     C.showToast('Senha atualizada com sucesso.', 'success');
     window.location.hash = '';
