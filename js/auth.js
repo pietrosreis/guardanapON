@@ -63,10 +63,10 @@
     if (result.error) {
       var msg = String(result.error.message || '').toLowerCase();
       if (msg.indexOf('already') >= 0) {
-        setErro('erroCadastroUsuario', 'Esse nome de usuário já existe.');
-        setErro('erroCadastroForm', 'Esse usuário já está cadastrado. Vá na aba "Acessar Conta".');
         C.qs('loginUsuario').value = username;
         trocarAbaAuth('entrar');
+        setErro('erroLoginForm', 'Usuário já cadastrado. Insira sua senha para entrar.');
+        C.showToast('Usuário já existe — faça login abaixo.', 'info');
       } else {
         setErro('erroCadastroForm', result.error.message || 'Erro ao cadastrar.');
       }
